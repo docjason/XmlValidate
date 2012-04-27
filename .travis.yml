@@ -1,1 +1,5 @@
 language: java
+install: gradle -q assemble
+notifications:
+    on_success: change
+    on_failure: change
