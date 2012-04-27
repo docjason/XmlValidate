@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.topografix.com/team/view.asp?gpx=mystic_basin_trail.gpx -->
+<gpx creator="ExpertGPS 1.1b1 - http://www.topografix.com" version="1.0"
+    xmlns="http://www.topografix.com/GPX/1/0"
+    xmlns:topografix="http://www.topografix.com/GPX/Private/TopoGrafix/0/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/Private/TopoGrafix/0/1 http://www.topografix.com/GPX/Private/TopoGrafix/0/1/topografix.xsd">
+    <name>Mystic River Basin Trails</name>
+    <desc>Both banks of the lower Mystic River have paved trails, allowing for a short and a long loop along the water.  The short loop is a two mile trail with no road crossings.  The long loop adds side-trips out to Draw Seven Park and the MBTA yard at Wellington Station, but crosses the six lanes of Route 28 twice.</desc>
+    <author>Dan Foster</author>
+    <email>trails@topografix.com</email>
+    <url>http://www.tufts.edu/mystic/amra/pamphlet.html</url>
+    <urlname>Lower Mystic Basin Trails</urlname>
+    <time>2002-03-12T21:13:27Z</time>
+    <keywords>mystic river, medford, tufts, biking, trail, draw seven park, wellington, amelia earhart dam</keywords>
+    <bounds maxlat="42.407100" maxlon="-71.074267" minlat="42.392077" minlon="-71.107983"/>
+    <wpt lat="42.398167" lon="-71.083339">
+        <ele>13.106400</ele>
+        <time>2002-03-12T18:36:28Z</time>
+        <name>205A</name>
+        <cmt>CSO 205A</cmt>
+        <desc>Concrete platform looking out onto the Mystic.
+While you take in the view, try not to think about the fact that you're standing on top of MWRA Wet Water Discharge Outflow #205A</desc>
+        <sym>Scenic Area</sym>
+        <type>Overlook</type>
+    </wpt>
+    <wpt lat="42.394900" lon="-71.082800">
+        <name>ASSEMBLYSQ</name>
+        <cmt>ASSEMBLY SQUARE MALL</cmt>
+        <desc>Assembly Square Mall</desc>
+        <sym>Shopping Center</sym>
+        <type>Shopping Mall</type>
+    </wpt>
+    <wpt lat="42.398467" lon="-71.090467">
+        <name>BLESSING</name>
+        <cmt>BLESSING OF THE BAY</cmt>
+        <desc>The Blessing of the Bay Boathouse, now run by the Somerville Boys and Girls Club.
+A dock with small boats for the children of Somerville.  Check out the Mystic River mural at the intersection of Shore Drive and Rt 16!</desc>
+        <url>http://www.everydaydesign.com/ourtown/bay.html</url>
+        <urlname>Boat-building on the Mystic River</urlname>
+        <sym>Boat Ramp</sym>
+        <type>Boat Launch</type>
+    </wpt>
+    <wpt lat="42.396994" lon="-71.081137">
+        <ele>10.698480</ele>
+        <time>2002-03-12T03:34:43Z</time>
+        <name>BLOCK 1</name>
+        <desc>Concrete platform looking out onto the Mystic</desc>
+        <sym>Scenic Area</sym>
+        <type>Overlook</type>
+    </wpt>
+    <wpt lat="42.397427" lon="-71.084487">
+        <name>CROSSWALK1</name>
+        <cmt>CROSSWALK</cmt>
+        <desc>Crosswalk</desc>
+        <sym>Dot</sym>
+        <type>Crosswalk</type>
+    </wpt>
+    <wpt lat="42.402251" lon="-71.082654">
+        <name>CROSSWALK2</name>
+        <desc>Crosswalk</desc>
+        <sym>Dot</sym>
+        <type>Crosswalk</type>
+    </wpt>
+    <wpt lat="42.393100" lon="-71.074267">
+        <name>DRAW 7</name>
+        <cmt>DRAW SEVEN BRIDGE</cmt>
+        <desc>Draw Seven Bridge</desc>
+        <sym>Bridge</sym>
+        <type>Bridge</type>
+    </wpt>
+    <wpt lat="42.393050" lon="-71.076367">
+        <name>DRAW7PK</name>
+        <cmt>DRAW SEVEN PARK</cmt>
+        <desc>Draw Seven Park</desc>
+        <sym>Park</sym>
+        <type>Park</type>
+    </wpt>
+    <wpt lat="42.394800" lon="-71.075300">
+        <ele>10.942320</ele>
+        <time>2002-03-06T00:13:13Z</time>
+        <name>EARHARTDAM</name>
+        <cmt>AMELIA EARHART DAM</cmt>
+        <desc>Amelia Earhart Dam</desc>
+        <sym>Dam</sym>
+        <type>Dam</type>
+    </wpt>
+    <wpt lat="42.401150" lon="-71.088767">
+        <ele>6.370320</ele>
+        <time>2002-03-08T04:10:57Z</time>
+        <name>FISH DOCK</name>
+        <cmt>FISHING DOCK</cmt>
+        <desc>A wooden fishing dock along the Mystic River in the middle of Torbert McDonald Park.</desc>
+        <sym>Anchor</sym>
+        <type>Dock</type>
+    </wpt>
+    <wpt lat="42.405495" lon="-71.098364">
+        <name>LOOP</name>
+        <cmt>STARTING POINT FOR LOOP TRAILS</cmt>
+        <desc>Starting point for the Mystic River loop trails.</desc>
+        <sym>Trail Head</sym>
+        <type>Junction</type>
+    </wpt>
+    <wpt lat="42.407100" lon="-71.091717">
+        <name>MEADOWGLEN</name>
+        <cmt>MEADOW GLEN MALL</cmt>
+        <desc>Meadow Glen Mall</desc>
+        <url>http://www.meadowglen.com/</url>
+        <urlname>Meadow Glen Mall</urlname>
+        <sym>Shopping Center</sym>
+        <type>Shopping Mall</type>
+    </wpt>
+    <wpt lat="42.403600" lon="-71.091383">
+        <ele>8.778240</ele>
+        <time>2002-03-08T04:10:57Z</time>
+        <name>OBS TOWER</name>
+        <cmt>OBSERVATION TOWER</cmt>
+        <desc>Observation Tower in Torbert McDonald Park.
+There are good views of the river from atop the wooden observation tower.</desc>
+        <sym>Tall Tower</sym>
+        <type>Tower</type>
+    </wpt>
+    <wpt lat="42.404429" lon="-71.085691">
+        <name>PARKING</name>
+        <cmt>PARKING LOT</cmt>
+        <desc>Parking Lot</desc>
+        <sym>Parking Area</sym>
+        <type>Parking</type>
+    </wpt>
+    <wpt lat="42.405850" lon="-71.096483">
+        <name>RT 16</name>
+        <cmt>LAWRENCE BRIDGE</cmt>
+        <desc>General Lawrence Bridge.  Route 16 crosses the Mystic River.  The bike path continues under the bridge on the east side of the river, but is currently torn up by construction near Hormel Stadium.</desc>
+        <sym>Bridge</sym>
+        <type>Bridge</type>
+    </wpt>
+    <wpt lat="42.399733" lon="-71.083567">
+        <name>RT 28</name>
+        <cmt>WELLINGTON BRIDGE</cmt>
+        <desc>Wellington Bridge
+Route 28 crosses the Mystic River on this 6 lane bridge.  Pedestrian walkways on both sides.  Access to the Assembly Square mall is at the south end of the bridge.</desc>
+        <sym>Bridge</sym>
+        <type>Bridge</type>
+    </wpt>
+    <wpt lat="42.404317" lon="-71.083200">
+        <name>ST POLICE</name>
+        <cmt>STATE POLICE</cmt>
+        <desc>State Police Barracks</desc>
+        <sym>Building</sym>
+        <type>Building</type>
+    </wpt>
+    <wpt lat="42.399567" lon="-71.092750">
+        <name>THE BEACH</name>
+        <cmt>SOMERVILLE BEACH</cmt>
+        <desc>The "Somerville Beach"
+People actually used to swim here.  Now only shopping carts do.</desc>
+        <sym>Swimming Area</sym>
+        <type>Beach</type>
+    </wpt>
+    <wpt lat="42.402017" lon="-71.107983">
+        <name>TUFTS PARK</name>
+        <cmt>TUFTS PARK</cmt>
+        <desc>Tufts Park</desc>
+        <url>http://www.wallacefloyd.com/los/tufts/tufts.htm</url>
+        <urlname>Tufts Park Redesign</urlname>
+        <sym>Park</sym>
+        <type>Park</type>
+    </wpt>
+    <wpt lat="42.400554" lon="-71.079901">
+        <name>WELL YACHT</name>
+        <cmt>WELLINGTON YACHT CLUB</cmt>
+        <desc>Mystic Wellington Yacht Club</desc>
+        <sym>Boat Ramp</sym>
+        <type>Boat Launch</type>
+    </wpt>
+    <wpt lat="42.397885" lon="-71.077115">
+        <name>WELLING PT</name>
+        <desc>Wellington Point
+The bike trail is unpaved beyond this point.  A dirt road continues under the railroad bridge.  Continue at your own risk...</desc>
+        <sym>Danger Area</sym>
+        <type>Dead End</type>
+    </wpt>
+    <wpt lat="42.401633" lon="-71.077133">
+        <name>WELLINGTON</name>
+        <cmt>WELLINGTON</cmt>
+        <desc>Wellington</desc>
+        <url>http://www.mbta.com/schedmaps/subway/wellingtonstop.cfm</url>
+        <urlname>Wellington MBTA Schedule</urlname>
+        <sym>RV Park</sym>
+        <type>Station</type>
+    </wpt>
+    <wpt lat="42.395889" lon="-71.077949">
+        <name>YACHT CLUB</name>
+        <cmt>WINTER HILL YACHT CLUB</cmt>
+        <desc>Winter Hill Yacht Club</desc>
+        <sym>Boat Ramp</sym>
+        <type>Boat Launch</type>
+    </wpt>
+</gpx>
+

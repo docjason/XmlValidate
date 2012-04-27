@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event how="m-s" opex="s-" qos="2-r-d" stale="2008-12-11T19:19:02.12Z"
+    start="2008-12-11T18:45:34.00Z" time="2008-12-11T18:45:34.00Z"
+    type="a-f-A-M-F-R-X" uid="GLOBALHAWK.30" version="2.0">
+    <detail>
+        <_flow-tags_ xplane="2008-12-11T18:45:34.00Z"/>
+        <contact callsign="LONGLOOK94" freq="333"/>
+        <react>
+            <xplane hostId="129.83.226.30" playerNum="0"/>
+        </react>
+        <spatial>
+            <attitude pitch="1.48017323017" roll="0.0721297413111"/>
+        </spatial>
+        <track course="124.8777771" speed="216.466522217"/>
+    </detail>
+    <point ce="20" hae="19397.5791317" lat="8.79673455458" le="20" lon="-15.365737613"/>
+</event>
+
