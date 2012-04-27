@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<title>XmlValidate</title>
+<style type="text/css">
+<!--
+body.main				{ background: #445569; color: #242A35 }
+div.author				{ width: 30%; margin-left: 70% }
+div.header				{ height: 100px; width: 90%; background: #989990; margin: 0 auto; margin-top: 25px; border: 1px solid #242A35 }
+div.hidden				{ visibility: hidden }
+div.main				{ height: 90%; width: 90%; background: #E0E0E0; margin: 0 auto; padding-top: 15px; margin-bottom: 25px; border: 1px solid #242A35 }
+dl.probs				{ margin-left: 16px; margin-right: 16px }
+dl.probs dt				{ margin-top: .25em }
+dl.probs dd br			{ margin-top: .25em }
+h1						{ text-align: center; vertical-align: middle; margin-top: 30px }
+h2						{ margin: 20px 10px 10px 10px; border: 1px solid #242A35; padding: 5px 10% 5px 5px; background: #B9BAAF }
+h3						{ margin: 1em 16px .5em 16px}
+p.normal				{ margin: 5px 16px }
+p.example				{ margin: .5em 5em }
+table.cont				{ margin: 0 auto; margin-top: 15px; margin-bottom: 15px; border-collapse:collapse }
+table.cont td			{ padding: 2px 5px }
+table.ct				{ border: 1px solid #242A35; margin: 15px 16px; border-collapse:collapse; background: #D0D0D0 }
+table.ct td				{ border: 1px solid #242A35; padding: 2px 5px; vertical-align: top }
+table.ct td.type		{ text-align: center }
+table.ct th				{ border: 1px solid #242A35; padding: 2px 5px; text-align: center }
+table.ct tr.header		{ background: #989990 }
+table.rel				{ border: 1px solid #242A35; margin: 0 auto; margin-top: 15px; margin-bottom: 15px; border-collapse:collapse; background: #D0D0D0 }
+table.rel td			{ border: 1px solid #242A35; padding: 2px 5px }
+table.rel td.version	{ text-align: center; vertical-align: top }
+table.rel th			{ border: 1px solid #242A35; padding: 2px 5px; text-align: center }
+table.rel tr.header		{ background: #989990 }
+table.res				{ border: 1px solid #242A35; margin: 15px 16px; border-collapse:collapse; background: #D0D0D0 }
+table.res td			{ border: 1px solid #242A35; padding: 2px 5px; vertical-align: top }
+table.res td.type		{ text-align: center }
+table.res td.value		{ text-align: center }
+table.res td.write		{ text-align: center }
+table.res th			{ border: 1px solid #242A35; padding: 2px 5px; text-align: center }
+table.res tr.header		{ background: #989990 }
+ul.changes				{ list-style-type: none; margin: 0px }
+-->
+</style>
+</head>
+<body class="main">
+<div class="header">
+<h1>XmlValidate</h1>
+</div>
+<div class="main">
+
+<h2>Introduction</h2>
+<p class="normal">
+<em>XmlValidate</em> is a quick &amp; flexible XML validator capable of performing bulk
+validation of XML documents against <a href="http://www.w3.org/TR/xmlschema-0/" target="_blank">XML Schemas</a>
+as defined in the XML documents or forcing another schema target. 
+</p>
+<br/>
+<p class="normal">
+<em>XmlValidate</em> validates individual XML documents by filename or URL
+or recursively searching directories with a list of target file
+extensions. &nbsp;First documents are checked as being well-formed XML.
+&nbsp;If parsing XML with non-validating parser fails then validation for that
+file stops. &nbsp;Otherwise validation continues in as requested:
+</p>
+<br/>
+<p class="normal">
+Here are three ways to validate XML documents using <em>XmlValidate</em>:
+</p>
+<br/>
+
+<ol>
+<li>
+<p class="normal">
+The <em>-map</em> option maps schema namespaces to given target schema locations.
+It rewrites XML with location of schema instance document then validates against
+target schema. &nbsp;If schema namespace is not found then it does not validate
+the document. &nbsp;This validates the document against the actual schema namespace
+defined in the document as opposed to the other approaches that rewrite
+the XML documents to any target schema.
+</p>
+<pre>
+  <strong>old:</strong> &lt;kml xmlns="http://earth.google.com/kml/2.1"&gt;
+
+  <strong>new:</strong> &lt;kml xmlns="http://earth.google.com/kml/2.1"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://earth.google.com/kml/2.1 file:/C:/xml/kml21.xsd"&gt;
+</pre>
+<p>Note if root element is "kml" and no namespace is specified then KML 2.0 namespace is used to validate document.</p>
+</li>
+
+<li>
+<p class="normal">
+Specifing a schema without a namespace implies <em>noNamespaceSchemaLocation</em>
+attribute should be added to all XML documents and validate against that schema.
+</p>
+<pre>
+ <strong>no namespace schema:</strong>
+
+     &lt;event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="C:/cot/schema/Event.xsd"&gt;
+</pre>
+</li>
+
+<li>
+<p class="normal">
+And finally specify <em>-ns</em> and <em>-schema</em> options to provide a target namespace URI
+and schema location. &nbsp;All XML documents specified in search location(s)
+will be rewritten and the target schemaLocation will be used regardless
+of the default namespace of that document. &nbsp;So for example KML 2.1 documents
+can be validated against the 2.2 schema, and vice versa.
+</p>
+<pre>
+  <strong>old:</strong> &lt;kml xmlns="http://earth.google.com/kml/2.1"&gt;
+
+  <strong>new:</strong> &lt;kml xmlns="http://www.opengis.net/kml/2.2"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.opengis.net/kml/2.2 file:/C:/xml/kml22.xsd"&gt;
+</pre>
+</li>
+</ol>
+
+<p class="normal">
+Note that XML is reformatted so errors/warnings with line/column numbers are respect to
+the reformatted content not the original so context is printed at that line/column number
+after each error in order that errors can be tracked down and corrected in original
+XML document. &nbsp;If you want the reformatted XML document printed then use <em>-dump</em> mode.
+If the error is in the XML Schema not the instance document then the context will not be printed.
+</p>
+
+<h2>Contents</h2>
+<p class="normal">This distribution contains the following files:
+<table class="cont" summary="Distribution Contents">
+	<tr>
+		<td>README.html</td>
+		<td>This documentation file</td>
+	</tr>
+	<tr>
+		<td>xmlValidate.jar</td>
+		<td>The java package for <em>XmlValidate</em> application</td>
+	</tr>
+	<tr>
+		<td>ns.map</td>
+		<td>Namespace mapping file associated with provided schemas used with -map option</td>
+	</tr>
+	<tr>
+		<td>jdom.jar</td>
+		<td>Java-based document object model (DOM) for XML</td>
+	</tr>
+	<tr>
+		<td>xercesImpl.jar</td>
+		<td>Jar file containing all the parser class files that implement one of the standard APIs supported by the parser</td>
+	</tr>
+	<tr>
+		<td>xml-apis.jar</td>
+		<td>Jar file containing all the standard APIs implemented by the parser.</td>
+	</tr>
+</table>
+</p>
+
+<h2>Installation</h2>
+<p class="normal">
+This standalone Java application requires a <a href="http://java.sun.com/javase/downloads/index.jsp" target="_blank">Java Runtime Environment (JRE)</a> installation of version 1.5 or later.
+</p>
+<p class="normal">
+<br/>
+XmlValidate requires jar libraries: JDOM and Xerces which are provided in the distribution and
+explicitly listed in the xmlValidate.jar manifest classpath so executing the jar sets up the
+classpath with the dependent jars located in the same directory.
+</p>
+<p class="normal">
+<br/>
+To install this application, copy the xmlValidate folder along with the batch files
+[ bin/kml21.bat + bin/kml22.bat + bin/xv.bat ]. &nbsp;Next edit <em>ns.map</em> file to add new XML schemas to match.
+</p>
+
+<h2>Usage</h2>
+<p class="normal">
+<blockquote>
+Usage: <em>XmlValidate</em> [options] [-map=file] | [-schema=file (-ns=uri)] &lt;xml-document file, URL, or directory...&gt;
+</blockquote>
+</p>
+<p class="normal">
+<Strong>Options:</Strong>
+
+<table class="res">
+	<tr>
+<td>-map=&lt;schema-property-file&gt;</td><td>    Schema map properties: namespace to file/URL mappings.<p/>
+Note if root element is "kml" and no namespace is specified then KML 2.0 namespace is used.
+	</td></tr>
+	<tr>
+<td>-schema=&lt;path-to-xml-schema&gt;</td><td>   Set target schema location (file path or URL).<p/>
+If validating many XML documents recommend make local copies of XML Schemas and refer to the local
+file name rather than having to fetch Schema by URL for each document.
+	</td></tr>
+	<tr>
+<td>-ns=&lt;schemaLocation-namespace&gt;</td><td>  Set namespace defined in <em>schemaLocation</em> attribute (e.g. http://earth.google.com/kml/2.1)<p/>
+Without setting this the target schema is assumed to have no namespace and <em>noNamespaceSchemaLocation</em>
+attribute is declared in XML instances.
+	</td></tr>
+
+	<tr>
+<td>-dump[=n]</td><td>
+                     			Print reformatted XML documents based on dump level:<p/>
+					&nbsp;0: no output [default],<br/>
+	                                &nbsp;1: print KML on errors only,<br/>
+					&nbsp;2: print all inputs<p/>
+	                                  If number not specified with <em>-dump</em> argument then 1 is assumed otherwise 0
+if <em>-dump</em> argument is not used.<br/>
+Note the line and column numbers in errors are with respect to these formatted XML documents.
+	</td></tr>
+
+	<tr>
+<td>-maxdump=n</td><td>Set max length (in bytes) of XML output used for each document in dump.
+	</td></tr>
+
+	<tr>
+<td>-kml</td><td>                          Validate .kml files only (default=xml)<p/> This overrides and replaces
+the default XML target with KML when searching for files in directories.
+	</td></tr>
+	<tr>
+<td>-kmz</td><td>                          Validate .kml and .kmz files only (default=xml)<p/> This overrides and replaces
+the default XML target with KML amnd KMZ when searching for files in directories.
+	</td></tr>
+	<tr>
+<td>-x=ExtensionList</td><td>           Add additional file extensions to list (default=xml)<br/>
+                                          extensions separated by ':' (e.g. -x=gpx:x3d:svg)
+	</td></tr>
+
+	<tr>
+<td>-S</td>
+<td>Enable summary mode to only show the final total counts (default=false).<BR/>
+This is helpful when validating large collection of files where output would be huge.
+	</td></tr>
+
+	<tr>
+<td>Enable verbose mode (default=false).
+<td>-v[=true]</td>
+	</td></tr>
+	<tr>
+<td>-debug</td>
+<td>Enable debug mode to print exception stack traces (default=false).</td>
+</tr>
+</table>
+
+<Strong>Examples:</Strong>
+</p>
+<ol>
+<li>
+To check all .kml files against target KML 2.2 schema regardless of default schema used:
+<blockquote>
+         <em>XmlValidate</em> -kml -schema C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2 &nbsp;C:/pathToMyKmlFiles
+</blockquote>
+</li>
+<li>
+To check all CoT .xml files against CoT Schema:
+<blockquote>
+         <em>XmlValidate</em> -schema C:/pathToXsd/event.xsd C:/pathToMyCoTFiles
+</blockquote>
+</li>
+<li>
+To kml and kmz files against local schemas as defined in KML files:
+<blockquote>
+         <em>XmlValidate</em> -map=ns.map C:/pathToMyKmlFiles
+</blockquote>
+</li>
+<li>
+Validate by URL for KML and target schema and print KML content<br/>
+if any errors are found but limit size of each file printed to first 4K:
+<blockquote>
+	 <em>XmlValidate</em> -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1
+		&nbsp;-schema=http://code.google.com/apis/kml/schema/kml21.xsd
+		&nbsp;http://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<Strong>Note:</Strong> <em>XmlValidate</em> command in examples above is a short-cut to the executable
+such as: <tt>java -jar xmlValidate.jar</tt> or in equivalent batch file/shell script. See kml21.bat, kml22.bat
+and xv.bat for example usage.
+</blockquote>
+
+<h2>Release History</h2>
+<p class="normal">
+<table class="rel" summary="Release History">
+	<tr class="header">
+		<th>Version</th>
+		<th>Release date</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td class="version">0.1.0</td>
+		<td class="version">04/17/08</td>
+		<td><ul class="changes">
+			<li>Initial Beta release</li>
+			<li>Validates target XML documents against target nonSchemaLocation schemas (e.g. CoT)</li>
+			</ul>
+		</td>
+	</tr>
+	<tr class="entry">
+		<td class="version">0.2.0</td>
+		<td class="version">02/01/09</td>
+		<td><ul class="changes">
+			<li>Added support for Schema namespaces</li>
+			<li>Added context in output for errors/warnings</li>
+			<li>Added -map option</li>
+			<li>Upgrade JDOM to 1.1</li>
+			<li>Upgrade Xerces to 2.9.1</li>
+		    </ul>
+		</td>
+	</tr>
+	<tr class="entry">
+		<td class="version">0.3.0</td>
+		<td class="version">02/13/09</td>
+		<td><ul class="changes">
+			<li>Added additional namespace locations in schemaLocation if locations defined in map</li>
+			<li>Added -kml, -kmz and -x options to look for files other than .xml</li>
+			<li>Added support for KMZ files</li>
+			<li>Added support to validate URLs</li>
+			<li>Created README documentation</li>
+		    </ul>
+		</td>
+	</tr>
+
+	<tr class="entry">
+		<td class="version">0.4.0</td>
+		<td class="version">03/23/09</td>
+		<td><ul class="changes">
+			<li>Suppress printing error context for XML Schema errors as opposed
+to validation errors in the target XML source.</li>
+			<li>Added -debug argument</li>
+			<li>Load all validation targets into list processing after all options are set</li>
+			<li>If target file does not exist then try to fetch as a URL.</li>
+		    </ul>
+		</td>
+	</tr>
+
+	<tr class="entry">
+		<td class="version">0.4.1</td>
+		<td class="version">08/23/10</td>
+		<td><ul class="changes">
+			<li>Added assignment of namespace locations to non-root elements in -map mode</li>
+		    </ul>
+		</td>
+	</tr>
+
+	<tr class="entry">
+		<td class="version">0.4.2</td>
+		<td class="version">03/23/11</td>
+		<td><ul class="changes">
+			<li>Added summary mode (-S) to suppress printing most details per file and dump at end the summary with counts
+			for each error/warning including counts for given root element and default namespace.
+			</li>
+		    </ul>
+		</td>
+	</tr>
+	
+	<tr class="entry">
+		<td class="version">1.0.0</td>
+		<td class="version">04/27/12</td>
+		<td><ul class="changes">
+			<li>Public version with minor cleanup and gradle build</li>			
+		    </ul>
+		</td>
+	</tr>
+
+</table>
+</p>
+<div class="author">
+	<div class="vcard">
+     	 <div class="fn">Author: Jason Mathews</div>
+     	 <div class="org hidden">The MITRE Corporation</div>	 
+	</div>
+</div>
+</div>
+</body>
+</html>
