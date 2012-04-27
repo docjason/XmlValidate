@@ -1,0 +1,15 @@
+# Specify URL or full absolute path if schemas in location
+# other than XmlValidate schemas directory.
+#
+# If xmlValidate is invoked from other than xmlValidate root directory
+# then -home option must be passed to xmlValidate with this location
+# to resolve the schema locations.
+#
+http://earth.google.com/kml/2.0=${XV_HOME}/schemas/kml20.xsd
+http://earth.google.com/kml/2.1=${XV_HOME}/schemas/kml21.xsd
+http://www.opengis.net/kml/2.2=${XV_HOME}/schemas/kml22.xsd
+http://www.google.com/kml/ext/2.2=${XV_HOME}/schemas/kml22gx.xsd
+http://www.topografix.com/GPX/1/0=${XV_HOME}/schemas/gpx10.xsd
+http://www.topografix.com/GPX/1/1=${XV_HOME}/schemas/gpx11.xsd
+#http://www.w3.org/1999/xhtml=${XV_HOME}/schemas/xhtml1-strict.xsd
+urn:oasis:names:tc:ciq:xsdschema:xAL:2.0=${XV_HOME}/schemas/xAL.xsd
