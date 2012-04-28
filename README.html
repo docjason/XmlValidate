@@ -60,7 +60,7 @@ as defined in the XML documents or forcing another schema target.
 or recursively searching directories with a list of target file
 extensions. &nbsp;First documents are checked as being well-formed XML.
 &nbsp;If parsing XML with non-validating parser fails then validation for that
-file stops. &nbsp;Otherwise validation continues in as requested:
+file stops.
 </p>
 <br/>
 <p class="normal">
@@ -135,24 +135,12 @@ If the error is in the XML Schema not the instance document then the context wil
 		<td>This documentation file</td>
 	</tr>
 	<tr>
-		<td>xmlValidate.jar</td>
-		<td>The java package for <em>XmlValidate</em> application</td>
-	</tr>
-	<tr>
 		<td>ns.map</td>
 		<td>Namespace mapping file associated with provided schemas used with -map option</td>
 	</tr>
 	<tr>
-		<td>jdom.jar</td>
-		<td>Java-based document object model (DOM) for XML</td>
-	</tr>
-	<tr>
-		<td>xercesImpl.jar</td>
-		<td>Jar file containing all the parser class files that implement one of the standard APIs supported by the parser</td>
-	</tr>
-	<tr>
-		<td>xml-apis.jar</td>
-		<td>Jar file containing all the standard APIs implemented by the parser.</td>
+		<td>build.gradle</td>
+		<td>Gradle build file</td>
 	</tr>
 </table>
 </p>
@@ -163,14 +151,16 @@ This standalone Java application requires a <a href="http://java.sun.com/javase/
 </p>
 <p class="normal">
 <br/>
-XmlValidate requires jar libraries: JDOM and Xerces which are provided in the distribution and
-explicitly listed in the xmlValidate.jar manifest classpath so executing the jar sets up the
-classpath with the dependent jars located in the same directory.
+XmlValidate requires jar libraries (JDOM and Xerces) which are downloaded using Gradle
+to build the project.
 </p>
 <p class="normal">
 <br/>
+XmlValidate is pre-loaded with a number of common XML schemas (KML, GPX).
 To install this application, copy the xmlValidate folder along with the batch files
-[ bin/kml21.bat + bin/kml22.bat + bin/xv.bat ]. &nbsp;Next edit <em>ns.map</em> file to add new XML schemas to match.
+[ bin/kml21.bat + bin/kml22.bat + bin/xv.bat ]. &nbsp;Next edit <em>ns.map</em> file to add new XML schemas to validate
+other XML documents. XML Schemas can be added by URL, absolute path, or add to schemas folder and prefix schema with
+${XV_HOME}.
 </p>
 
 <h2>Usage</h2>
@@ -258,7 +248,7 @@ To check all CoT .xml files against CoT Schema:
 </blockquote>
 </li>
 <li>
-To kml and kmz files against local schemas as defined in KML files:
+To check kml and kmz files against local schemas as defined in KML files:
 <blockquote>
          <em>XmlValidate</em> -map=ns.map C:/pathToMyKmlFiles
 </blockquote>
@@ -275,8 +265,8 @@ if any errors are found but limit size of each file printed to first 4K:
 </ol>
 <blockquote>
 <Strong>Note:</Strong> <em>XmlValidate</em> command in examples above is a short-cut to the executable
-such as: <tt>java -jar xmlValidate.jar</tt> or in equivalent batch file/shell script. See kml21.bat, kml22.bat
-and xv.bat for example usage.
+command using java and XmlValidate.jar on the CLASSPATH or by using the equivalent batch file/shell script.
+See xv.bat, kml21.bat, and kml22.bat for example usage.
 </blockquote>
 
 <h2>Release History</h2>
