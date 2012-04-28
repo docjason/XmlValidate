@@ -214,6 +214,10 @@ public class XmlValidate {
 		return extensionSet;
 	}
 
+	public void setKmlMode(boolean kmlMode) {
+		this.kmlMode = kmlMode;
+	}
+
 	public void setSummary(boolean summary) {
 		this.summary = summary;
 	}
