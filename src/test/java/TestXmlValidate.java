@@ -26,6 +26,14 @@ public class TestXmlValidate extends TestCase {
 		assertEquals(2, validator.getFileCount());
 	}
 
+	public void testBadXml() {
+		XmlValidate validator = new XmlValidate();
+		validator.validate(new File("data/bad.xml"));
+		validator.setSummary(true);
+		validator.dumpStatus();
+		assertEquals(1, validator.getFileCount());
+	}
+
 	public void testCotXml() {
 		// Test XML document with no namespace
 		// this will force adding xsi:noNamespaceSchemaLocation attribute to root element for validation
