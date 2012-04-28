@@ -511,7 +511,6 @@ public class XmlValidate {
             // for each namespace check if defined in map
             // boolean hasGx = false;
             for (Object item : root.getAdditionalNamespaces()) {
-                if (!(item instanceof Namespace)) continue;
                 Namespace ns = (Namespace)item;
                 String nsURI = ns.getURI();
                 schemaLoc = schemaMap.get(nsURI);
@@ -640,7 +639,6 @@ public class XmlValidate {
         }
         // for each namespace check if defined in map
         for (Object item : parent.getAdditionalNamespaces()) {
-            if (!(item instanceof Namespace)) continue;
             String nsURI = ((Namespace) item).getURI();
             if (namespaces.contains(nsURI)) continue;
             String schemaLoc = schemaMap.get(nsURI);
