@@ -3,7 +3,6 @@ import org.mitre.xml.validate.UrlResource;
 import org.mitre.xml.validate.XmlValidate;
 
 import java.io.File;
-import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
@@ -21,14 +20,14 @@ public class TestXmlValidate extends TestCase {
 		// add namespace map to validator
 		validator.setMap(new File("ns.map"));
 		validator.validate(new UrlResource(System.out, url, null));
-		url = new File("data/placemark.kml").toURI().toURL();
+		url = new File("data/kml/placemark.kml").toURI().toURL();
 		validator.validate(new UrlResource(System.out, url, null));
 		assertEquals(2, validator.getFileCount());
 	}
 
 	public void testBadXml() {
 		XmlValidate validator = new XmlValidate();
-		validator.validate(new File("data/bad.xml"));
+		validator.validate(new File("data/bad/bad.xml"));
 		validator.setSummary(true);
 		validator.dumpStatus();
 		assertEquals(1, validator.getFileCount());
@@ -43,7 +42,7 @@ public class TestXmlValidate extends TestCase {
 		validator.setDebug(true);
 		validator.setHomeDir(".");
 		validator.setDumpLevel(2);
-		validator.validate(new File("data/cot.xml"));
+		validator.validate(new File("data/xml/cot.xml"));
 		//validator.setSummary(true);
 		validator.dumpStatus();
 		assertEquals(1, validator.getFileCount());
@@ -63,21 +62,25 @@ public class TestXmlValidate extends TestCase {
 		validator.setSchema(new File("schemas/kml21.xsd"));
 		validator.setNamespace("http://earth.google.com/kml/2.1");
 		validator.setSummary(true);
+		validator.setKmlMode(true);
 
 		//validator.setVerbose();
-		validator.validate(new File("data"));
+		validator.validate(new File("data/kml"));
+		validator.validate(new File("data/bad/zero.kml"));
+		//validator.validate(new File("data/kmz"));
 		validator.dumpStatus();
 
-		assertEquals(13, validator.getFileCount());
+		assertEquals(9, validator.getFileCount());
 		// assertEquals(2, validator.getErrors());
 		// assertTrue(validator.getErrors() != 0);
-		assertEquals(1, validator.getWarnings());
+		assertEquals(0, validator.getWarnings());
 	}
 
 	public void testGpxFile() {
 		// Validate all GPX/KML/KMZ documents against the declared namespace
 		XmlValidate validator = new XmlValidate();
 		validator.setSummary(true);
+		validator.setKmlMode(true);
 		Set<String> extensionSet = validator.getExtensionSet();
 		// add namespace map to validator
 		validator.setMap(new File("ns.map"));
