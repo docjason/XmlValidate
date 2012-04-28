@@ -155,7 +155,7 @@ public class XmlValidate {
     private Map<String,Integer> stats = new TreeMap<String,Integer>();
 	private boolean kmlMode;
 
-	private static final Set<String> KML_ELEMENTS = new HashSet<String>(4);
+	private static final Set<String> KML_ELEMENTS = new HashSet<String>(5);
 
 	static {
 		// possible non-kml root elements in KML document with no namespace
@@ -163,6 +163,7 @@ public class XmlValidate {
 		KML_ELEMENTS.add("GroundOverlay");
 		KML_ELEMENTS.add("NetworkLink");
 		KML_ELEMENTS.add("ScreenOverlay");
+		KML_ELEMENTS.add("PhotoOverlay");
 	}
 
 	public XmlValidate() {
@@ -566,7 +567,7 @@ public class XmlValidate {
                     + schemaUri, xsiNamespace);
         } else {
             // xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            // xsi:noNamespaceSchemaLocation="C:/ns/xml/v2/xsd/Event.xsd">
+            // xsi:noNamespaceSchemaLocation="C:/cot/xsd/Event.xsd">
             if (schemaLocation != null) {
                 schemaLocation.detach();
                 System.err.println("\tdetach schemaLocation: "
@@ -710,7 +711,7 @@ public class XmlValidate {
     }
 
     public void setSchema(File schemaFile) {
-        schemaUri = schemaFile.getAbsoluteFile().toURI().toString();
+        schemaUri = schemaFile.getAbsoluteFile().toURI().toASCIIString();
     }
 
     public void setNamespace(String schemaNamespace) {
@@ -740,10 +741,6 @@ public class XmlValidate {
 
     public void setOutputStream(PrintStream out) {
         this.out = out;
-    }
-
-    public boolean isDebug() {
-        return debug;
     }
 
     public void setDebug(boolean debug) {
@@ -931,7 +928,6 @@ public class XmlValidate {
                 else
                     try {
                         // otherwise validate target as URL
-						System.out.println("XXX: ns="+validator.schemaNamespace);
                         validator.validate(new UrlResource(validator.out, new URL(arg), validator.schemaNamespace));
                     } catch (MalformedURLException e) {
                         System.err.println("WARN: file/URL not found " + arg + ": " + e.getMessage());
