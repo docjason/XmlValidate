@@ -222,6 +222,13 @@ public class XmlValidate {
 		this.summary = summary;
 	}
 
+	/**
+	 * Set dump level to print reformatted XML documents.
+	 * 			0 -> no output [default],
+	 * 			1 -> print KML on errors only,
+	 * 			2 -> print all inputs");
+	 * @param dumpLevel
+	 */
 	public void setDumpLevel(int dumpLevel) {
 		this.dumpLevel = dumpLevel;
 	}
@@ -531,8 +538,8 @@ public class XmlValidate {
                 // root.setAttribute(ns.getPrefix(), ns.getURI() + " " + schemaLoc, xmlns);
                 // root.setNamespace(Namespace.getNamespace(ns.getPrefix(), ns.getURI() + " " + schemaLoc));
             }
-	/*
-			if ("kml".equals(root.getName()) && !hasGx) {
+		/*
+				if ("kml".equals(root.getName()) && !hasGx) {
 				String nsURI = NS_GOOGLE_KML_EXT;
 				schemaLoc = schemaMap.get(nsURI);
 				if (schemaLoc != null) {
@@ -542,7 +549,7 @@ public class XmlValidate {
 					schemaLocBuf.append(' ').append(nsURI).append(' ').append(schemaLoc);
 				}
 			}
-	*/
+		*/
             root.setAttribute("schemaLocation", schemaLocBuf.toString(), xsiNamespace);
             // if namespace declared on non-root elements then lookup schemaLocation locations
             for (Object child : root.getChildren()) {
@@ -576,8 +583,10 @@ public class XmlValidate {
                 System.err.println("\tdetach schemaLocation: "
                         + schemaLocation.getValue());
             }
-            root.setAttribute("noNamespaceSchemaLocation", schemaUri,
+			if (schemaUri != null) {
+            	root.setAttribute("noNamespaceSchemaLocation", schemaUri,
                     xsiNamespace);
+			}
         }
 
         return doc;
