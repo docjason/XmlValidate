@@ -28,9 +28,21 @@ public class TestXmlValidate extends TestCase {
 	public void testBadXml() {
 		XmlValidate validator = new XmlValidate();
 		validator.validate(new File("data/bad/bad.xml"));
+		validator.setMap(new File("ns.map"));
 		validator.setSummary(true);
 		validator.dumpStatus();
 		assertEquals(1, validator.getFileCount());
+	}
+
+	public void testBadKml() {
+		XmlValidate validator = new XmlValidate();
+		validator.setMap(new File("ns.map"));
+		validator.setKmlMode(true);
+		validator.setDumpLevel(1);
+		validator.validate(new File("data/bad/badColor.kml"));
+		validator.dumpStatus();
+		assertEquals(1, validator.getFileCount());
+		assertTrue(validator.getErrors() != 0);
 	}
 
 	public void testCotXml() {
@@ -89,7 +101,7 @@ public class TestXmlValidate extends TestCase {
 		extensionSet.add("kmz");
 		extensionSet.add("gpx");
 		validator.validate(new File("data"));
-		assertEquals(14, validator.getFileCount());
+		assertEquals(15, validator.getFileCount());
 		assertTrue(validator.getErrors() != 0);
 	}
 }

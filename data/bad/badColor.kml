@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark id="this is not valid id">
+    <name>styled placemark</name>
+    <Style>
+      <IconStyle>	
+	    <scale>1.1</scale>
+        <color>ff0000</color> <!-- color omits alpha value -->        
+      </IconStyle>
+      <LabelStyle>	
+        <color>ff0000</color> <!-- color omits alpha value -->
+      </LabelStyle>
+    </Style>
+    <Point>
+	<coordinates>48,29</coordinates>
+    </Point>
+  </Placemark>
+</kml>
