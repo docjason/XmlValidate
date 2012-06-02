@@ -14,7 +14,7 @@ REM to increase memory limits to validate very large XML.
 set OPTS=-Xmx64m
 
 echo Validate CoT XML document with non-namespace schema
-call bin\xv -schema=schemas\Event.xsd -v data\cot.xml
+call bin\xv -schema=schemas\Event.xsd -v data/xml/cot.xml
 echo.
 echo ==========================================
 
