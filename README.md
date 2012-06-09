@@ -51,7 +51,7 @@ after each error in order that errors can be tracked down and corrected in origi
 XML document. If you want the reformatted XML document printed then use *-dump* mode.
 If the error is in the XML Schema not the instance document then the context will not be printed.
 
-Usage
+##Usage
 -----
 
 Usage: XmlValidate [options] [-map=file] | [-schema=file (-ns=uri)] &lt;xml-document file, URL, or directory...&gt;
