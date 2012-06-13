@@ -2,3 +2,4 @@
 *.jar
 .gradle/
 build/
+bin/setenv.bat 
