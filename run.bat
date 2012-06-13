@@ -20,13 +20,13 @@ echo ==========================================
 
 echo.
 echo Validate all KML/KMZ documents as KML 2.1 Schema
-call bin\kml21 -kmz data
+call bin\kml21 -kmz data/kml data/kmz
 echo.
 echo ==========================================
 
 echo.
 echo Validate all GPX/KML/KMZ documents
-call bin\xv -v -kmz -x=gpx data
+call bin\xv -v -kmz -x=gpx data/xml data/kml data/kmz
 echo.
 echo Notice the tessellate-orig.kml example has the wrong namespace
 echo and fails to validate against the specified schema namespace.
