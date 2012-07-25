@@ -468,7 +468,7 @@ public class XmlValidate {
 			}
 		}
 
-		// first check if we use schema mapping to find associated Schema location for the namespace 
+		// first check if we use schema mapping to find associated Schema location for the namespace
         if (schemaMap != null) {
 			// rootNS should never be null. Even if no default namespace should have
 			// empty rootNS with empty string as its namespace prefix and associated URI.
@@ -534,7 +534,7 @@ public class XmlValidate {
                     // e.g.  xmlns:gx="http://www.google.com/kml/ext/2.2">
                     schemaLocBuf.append(' ').append(nsURI).append(' ').append(schemaLoc);
                     namespaces.add(nsURI);
-                }
+                } else if (verbose) out.println("WARN: Cannot find location of schema: " + nsURI);
                 // root.setAttribute(ns.getPrefix(), ns.getURI() + " " + schemaLoc, xmlns);
                 // root.setNamespace(Namespace.getNamespace(ns.getPrefix(), ns.getURI() + " " + schemaLoc));
             }
@@ -701,6 +701,7 @@ public class XmlValidate {
                     // otherwise is it a URL or bad file name ??
                     else System.err.println("INFO: " + schemaLocation + " does not exist locally");
                 }
+				if (debug) out.printf("Set %s -> %s%n", ns, schemaLocation);
                 schemaMap.put(ns, schemaLocation);
             }
         } catch (IOException ioe) {
@@ -926,7 +927,6 @@ public class XmlValidate {
             if (arg.startsWith("http:"))
                 try {
                     // validate as URL
-					System.out.println("XXX: ns="+validator.schemaNamespace);
                     validator.validate(new UrlResource(validator.out, new URL(arg), validator.schemaNamespace));
                 } catch (MalformedURLException e) {
                     System.err.println("WARN: bad URL " + arg + ": " + e.getMessage());
