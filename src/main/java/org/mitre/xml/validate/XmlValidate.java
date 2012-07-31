@@ -534,7 +534,9 @@ public class XmlValidate {
                     // e.g.  xmlns:gx="http://www.google.com/kml/ext/2.2">
                     schemaLocBuf.append(' ').append(nsURI).append(' ').append(schemaLoc);
                     namespaces.add(nsURI);
-                } else if (verbose) out.println("WARN: Cannot find location of schema: " + nsURI);
+                } else if (verbose && !"http://www.w3.org/2001/XMLSchema-instance".equals(nsURI)) {
+			out.println("WARN: Cannot find location of schema: " + nsURI);
+		}
                 // root.setAttribute(ns.getPrefix(), ns.getURI() + " " + schemaLoc, xmlns);
                 // root.setNamespace(Namespace.getNamespace(ns.getPrefix(), ns.getURI() + " " + schemaLoc));
             }
