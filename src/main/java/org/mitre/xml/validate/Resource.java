@@ -82,7 +82,7 @@ public abstract class Resource implements ErrorHandler {
 
     public void printFile() {
         if (!printed) {
-            out.println("\nCheck: " + targetFile);
+            if (targetFile != null) out.println("\nCheck: " + targetFile);
             printed = true;
         }
         // dump XML for dump Level == 1 (on error condition)
