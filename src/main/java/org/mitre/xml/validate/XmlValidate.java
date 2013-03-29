@@ -840,7 +840,7 @@ public class XmlValidate {
         System.err.println("\t   if any errors are found but limit size of each file printed to first 4K:");
         System.err.println("\t    XmlValidate -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1\n" +
                 "\t\t-schema=http://code.google.com/apis/kml/schema/kml21.xsd\n" +
-                "\t\thttp://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.ns");
+                "\t\thttp://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz");
         System.err.println("\nNote: XmlValidate command in examples above is a short-cut to the executable\n" +
                 "such as: java -jar xmlValidate.jar or in equivalent batch file/shell script.");
 
