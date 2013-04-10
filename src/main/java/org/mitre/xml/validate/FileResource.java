@@ -61,7 +61,8 @@ public class FileResource extends Resource {
             return builder.build(file);
         }
         // otherwise try finding KML in compressed KMZ file
-		ZipFile zf;
+        // NOTE: only the first "root" KML file is fetched. Supporting KML files will not be validated.
+        ZipFile zf;
         try {
 		 	zf = new ZipFile(file);
 		} catch (ZipException ze) {
