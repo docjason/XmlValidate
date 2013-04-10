@@ -55,6 +55,8 @@ public class FileResource extends Resource {
     }
 
     private Document buildDocument(SAXBuilder builder) throws JDOMException, IOException {
+		// if KMZ file has .kml extension then out of luck - it will fail to parse
+		// KMZ files must have .kmz extension - case doesn't matter
         if (!file.getName().toLowerCase().endsWith(".kmz")) {
             return builder.build(file);
         }
