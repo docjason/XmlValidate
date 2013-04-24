@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- http://www.topografix.com/team/view.asp?gpx=mystic_basin_trail.gpx -->
 <gpx creator="ExpertGPS 1.1b1 - http://www.topografix.com" version="1.0"
-    xmlns="http://www.topografix.com/GPX/1/0"
-    xmlns:topografix="http://www.topografix.com/GPX/Private/TopoGrafix/0/1"
+    xmlns="http://www.topografix.com/GPX/1/0"    
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/Private/TopoGrafix/0/1 http://www.topografix.com/GPX/Private/TopoGrafix/0/1/topografix.xsd">
     <name>Mystic River Basin Trails</name>
     <desc>Both banks of the lower Mystic River have paved trails, allowing for a short and a long loop along the water.  The short loop is a two mile trail with no road crossings.  The long loop adds side-trips out to Draw Seven Park and the MBTA yard at Wellington Station, but crosses the six lanes of Route 28 twice.</desc>

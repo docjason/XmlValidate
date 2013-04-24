@@ -1,7 +1,8 @@
 XmlValidate
 ===========
 
-A quick & flexible XML validator capable of performing bulk validation of XML documents against XML Schemas as defined in the XML documents or forcing another schema target.
+A quick & flexible open source XML validator capable of performing bulk validation of XML documents
+against XML Schemas as defined in the XML documents or forcing another schema target.
 
 *XmlValidate* validates individual XML documents by filename or URL
 or recursively searching directories with a list of target file

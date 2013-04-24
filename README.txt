@@ -55,32 +55,52 @@ schemas, and batch files are in the correct locations.
 	==========================================
 
 	Validate all GPX/KML/KMZ documents
-	> bin\xv -v -kmz -x=gpx data
-	dir: data
+	> bin\xv.bat -v -kmz -x=gpx data/xml data/kml data/kmz
+	dir: data\xml
 
-	Check: data\big.kmz
+	Check: data\xml\mystic_basin_trail.gpx
+		 *OK*
+	dir: data\kml
+
+	Check: data\kml\data-ext-atom.kml
+	assign Namespace http://www.w3.org/2005/Atom -> file:/C:/projects/xmlValidate/temp/XmlValidate/schemas/atom.xsd
 		 *OK*
 
-	Check: data\mystic_basin_trail.gpx
+	Check: data\kml\earth-google-com-kml-21.kml
 		 *OK*
 
-	Check: data\placemark.kml
+	Check: data\kml\earth-google-com-kml-22.kml
 		 *OK*
 
-	Check: data\tessellate-orig.kml
+	Check: data\kml\no-namespace.kml
+	INFO: no root namespace
+		 *OK*
+
+	Check: data\kml\nonkmlroot.kml
+		 *OK*
+
+	Check: data\kml\placemark.kml
+		 *OK*
+
+	Check: data\kml\tessellate-orig.kml
 	http://www.opengis.net/kml/2.2
-	ERROR: SAXParseException org.xml.sax.SAXParseException: cvc-complex-type.2.4.a: Invalid content was found starting with element 'tilt'. One of '{"http://www.opengis.net/kml/2.2":altitudeModeGroup, "http://www.opengis.net/kml/2.2":LookAtSimpleExtensionGroup, "http://www.opengis.net/kml/2.2":LookAtObjectExtensionGroup}' is expected.
+	ERROR: SAXParseException org.xml.sax.SAXParseException; lineNumber: 27; columnNumber: 13; cvc-complex-type.2.4.a: Invalid content was found starting with element 'tilt'. One of '{"http://www.opengis.net/kml/2.2":altitudeModeGroup, "http://www.opengis.net/kml/2.2":LookAtSimpleExtensionGroup, "http://www.opengis.net/kml/2.2":LookAtObjectExtensionGroup}' is expected.
 	Line: 27, column: 13
 	27: <tilt>***62.04855796276328</tilt>
 
-	Check: data\tessellate21.kml
+	Check: data\kml\tessellate21.kml
 		 *OK*
 
-	Check: data\tessellate22.kml
+	Check: data\kml\tessellate22.kml
+		 *OK*
+	dir: data\kmz
+
+	Check: data\kmz\big.kmz
 		 *OK*
 
-	Errors: 1  Warnings: 0  Files: 6  Time: 421 ms
-	Valid files 5/6 (83%)
+	Errors: 1  Warnings: 0  Files: 11  Time: 895 ms
+	Valid files 10/11 (91%)
+
 
 	Notice the tessellate-orig.kml example has the wrong namespace
 	and fails to validate against the specified schema namespace.
