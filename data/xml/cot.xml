@@ -5,14 +5,11 @@
     <detail>
         <_flow-tags_ xplane="2008-12-11T18:45:34.00Z"/>
         <contact callsign="LONGLOOK94" freq="333"/>
-        <react>
-            <xplane hostId="129.83.226.30" playerNum="0"/>
-        </react>
         <spatial>
-            <attitude pitch="1.48017323017" roll="0.0721297413111"/>
+            <attitude pitch="1.480173" roll="0.07213"/>
         </spatial>
         <track course="124.8777771" speed="216.466522217"/>
     </detail>
-    <point ce="20" hae="19397.5791317" lat="8.79673455458" le="20" lon="-15.365737613"/>
+    <point ce="20" hae="19397.6" lat="8.796735" le="20" lon="-15.365738"/>
 </event>
 
