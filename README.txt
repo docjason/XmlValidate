@@ -13,10 +13,10 @@ Several .bat files are provided to run XmlValidate with various
 pre-defined options. These are located in the 'bin' directory.
 
 To run these .bat files you must first run the following command:
-	> gradle setup
+	> gradle install
 	
-This creates 'bin/setup.bat' file, which locates the required jar files
-and is called by each of the .bat files (e.g. bin/xv.bat).
+This copies dependent .jar to build/libs folder which is used for the
+classpath in each of the .bat files (e.g. bin/xv.bat).
 
 To test installation of XmlValidate run the run.bat script
 at the top-level of the distribution.

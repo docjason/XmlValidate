@@ -1,5 +1,4 @@
 # Package Files #
-*.jar
+gradle/
 .gradle/
 build/
-bin/setenv.bat 

@@ -1,8 +1,7 @@
 XmlValidate
 ===========
 
-A quick & flexible open source XML validator capable of performing bulk validation of XML documents
-against XML Schemas as defined in the XML documents or forcing another schema target.
+A quick & flexible open source XML validator capable of performing bulk validation of XML documents against XML Schemas as defined in the XML documents or forcing another schema target.
 
 *XmlValidate* validates individual XML documents by filename or URL
 or recursively searching directories with a list of target file
@@ -51,6 +50,13 @@ the reformatted content not the original so context is printed at that line/colu
 after each error in order that errors can be tracked down and corrected in original
 XML document. If you want the reformatted XML document printed then use *-dump* mode.
 If the error is in the XML Schema not the instance document then the context will not be printed.
+
+Building with Gradle
+--------------------
+
+Type: ./gradlew clean test install
+
+Downloaded files (including the Gradle distribution itself) will be stored in the Gradle user home directory (typically "<user_home>/.gradle").
 
 Usage
 -----
