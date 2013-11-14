@@ -17,6 +17,8 @@ package org.mitre.xml.validate;
 import org.jdom2.*;
 import org.jdom2.input.JDOMParseException;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.input.sax.XMLReaderJDOMFactory;
+import org.jdom2.input.sax.XMLReaders;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -193,7 +195,8 @@ public class XmlValidate {
         }
         */
 
-        validatingBuilder = new SAXBuilder(true);
+        validatingBuilder = new SAXBuilder(XMLReaders.XSDVALIDATING);
+
         //validatingBuilder.setValidation(true);
         //validatingBuilder.setEntityResolver(this);
 
@@ -418,10 +421,10 @@ public class XmlValidate {
 
 	private Document getDocument(Resource res) throws JDOMException, IOException {
         Document doc = res.getDocument(builder);
-        Iterator it = doc.getDescendants();
+        Iterator<Content> it = doc.getDescendants();
         //boolean modified = false;
         while (it.hasNext()) {
-            Object obj = it.next();
+			Content obj = it.next();
             if (obj instanceof DocType) {
                 //DocType docType = (DocType)obj;
                 it.remove();
