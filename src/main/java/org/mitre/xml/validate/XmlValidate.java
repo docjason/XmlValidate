@@ -17,7 +17,6 @@ package org.mitre.xml.validate;
 import org.jdom2.*;
 import org.jdom2.input.JDOMParseException;
 import org.jdom2.input.SAXBuilder;
-import org.jdom2.input.sax.XMLReaderJDOMFactory;
 import org.jdom2.input.sax.XMLReaders;
 
 import java.io.*;
