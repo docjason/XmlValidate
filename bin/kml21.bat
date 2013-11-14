@@ -4,7 +4,7 @@ setlocal
 rem %~dp0 is expanded pathname of the current script under NT
 set XV_HOME=%~dp0..
 
-if not exist "%XV_HOME%\build\libs\jdom-1.1.3.jar" goto rungradle
+if not exist "%XV_HOME%\build\libs\jdom2-2.0.5.jar" goto rungradle
 set OPTS=-Xmx64m
 set SCHEMA=http://earth.google.com/kml/2.1
 REM set SCHEMALOC=http://code.google.com/apis/kml/schema/kml21.xsd
@@ -14,5 +14,5 @@ java %OPTS% -classpath "%CLASSPATH%" org.mitre.xml.validate.XmlValidate -kml -ns
 goto end
 
 :rungradle
-echo Must run "gradle setup" from XmlValidate home directory to configure batch file environment
+echo Must run "gradle install" from XmlValidate home directory to configure batch file environment
 :end

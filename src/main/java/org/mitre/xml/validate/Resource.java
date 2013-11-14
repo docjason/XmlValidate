@@ -14,10 +14,10 @@
  */
 package org.mitre.xml.validate;
 
-import org.jdom.Document;
-import org.jdom.JDOMException;
-import org.jdom.output.XMLOutputter;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.JDOMException;
+import org.jdom2.output.XMLOutputter;
+import org.jdom2.input.SAXBuilder;
 import org.xml.sax.*;
 
 import java.io.IOException;
@@ -25,7 +25,6 @@ import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.io.PrintStream;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -195,7 +194,7 @@ public abstract class Resource implements ErrorHandler {
     public String getXmlContent() {
         if (xmlContent == null) {
             XMLOutputter xo = new XMLOutputter();
-            xo.setFormat(org.jdom.output.Format.getPrettyFormat());
+            xo.setFormat(org.jdom2.output.Format.getPrettyFormat());
 
             // TODO: non-UTF8 encoding is overriden with UTF-8 type
 
