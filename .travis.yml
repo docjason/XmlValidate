@@ -1,5 +1,6 @@
 language: java
 install: gradle -q assemble
+script: gradle check
 notifications:
     on_success: change
     on_failure: change
