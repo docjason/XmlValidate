@@ -64,8 +64,12 @@ import java.util.*;
  * will be added regardless of the default namespace of that document.  For example,
  * KML 2.1 documents can be validated against the 2.2 schema, and vice versa.
  *
+ * <pre>
+ * 		-schema=C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2
+ * </pre>
+ *
  * Note that XML is reformatted so errors/warnings with line/column numbers are respect to
- * the reformatted content not the orginal but context is printed at that line/column number
+ * the reformatted content not the original but context is printed at that line/column number
  * after each error if applicable so errors can be tracked down and corrected in original
  * XML document.  If you want the reformatted XML document printed then enable -dump option.
  * If the error is in the XML Schema not the instance document then the context will not
@@ -92,6 +96,7 @@ import java.util.*;
  * 			Assume KML 2.0 instance if root element doesn't have a default namespace
  * 			and root element is one of following: { Placemark, GroundOverlay, NetworkLink, ScreenOverlay }
  * 			Added check for KML content in files with .kmz extension. Retry such files as text.
+ * 11/14/13 Migrate JDOM 1.1 to JDOM 2.0.5
  *
  * @see http://www.w3.org/TR/xmlschema-0/
  *
@@ -836,8 +841,8 @@ public class XmlValidate {
         System.err.println("\t    XmlValidate -kml -schema=C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2 C:/pathToMyKmlFiles\n");
         System.err.println("\t2) To check all CoT .xml files against CoT Schema:");
         System.err.println("\t    XmlValidate -schema C:/pathToXsd/event.xsd C:/pathToMyCoTFiles\n");
-        System.err.println("\t3) To kml and kmz files against local schemas as defined in KML files:");
-        System.err.println("\t    XmlValidate -map=ns.map C:/pathToMyKmlFiles\n");
+        System.err.println("\t3) Validate kml and kmz files against local schemas as defined in KML files:");
+        System.err.println("\t    XmlValidate -kmz -map=ns.map C:/pathToMyKmlFiles\n");
         System.err.println("\t4) Validate by URL for KML and target schema and print KML content");
         System.err.println("\t   if any errors are found but limit size of each file printed to first 4K:");
         System.err.println("\t    XmlValidate -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1\n" +
