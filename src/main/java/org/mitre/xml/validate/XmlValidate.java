@@ -862,7 +862,6 @@ public class XmlValidate {
 
     /**
      * Main program entry point.
-     * @param args
      */
     public static void main (String [] args) {
 
@@ -879,7 +878,6 @@ public class XmlValidate {
 				validator.setDebug(true);
 			} else if (arg.startsWith("-home=")) {
 				validator.setHomeDir(arg.substring(6));
-				break;
 			}
 		}
         for (String arg : args) {
