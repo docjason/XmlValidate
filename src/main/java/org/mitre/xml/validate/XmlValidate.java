@@ -700,9 +700,10 @@ public class XmlValidate {
                 String ns = s.substring(0, ind).trim();
                 String schemaLocation = s.substring(ind + 1).trim();
                 if (schemaLocation.startsWith("${XV_HOME}") && homeDir != null) {
-                    // System.err.println(schemaLocation);
+					String old = schemaLocation;
                     schemaLocation = homeDir + schemaLocation.substring(10);
-                }
+					if (debug) System.err.printf("XXX: add %s > %s%n", old, schemaLocation);
+				}
                 if (!schemaLocation.startsWith("http:")) {
                     File loc = new File(schemaLocation); // .replace("\\","/")
                     if (loc.exists())
@@ -751,7 +752,8 @@ public class XmlValidate {
         if (dir != null && dir.isDirectory()) {
             try {
                 this.homeDir = dir.getCanonicalPath();
-            } catch (IOException e) {
+				if (debug) System.err.println("XXX: set home dir=" + homeDir);
+			} catch (IOException e) {
                 this.homeDir = dir.getAbsolutePath();
             }
         } else {
@@ -871,6 +873,15 @@ public class XmlValidate {
         XmlValidate validator = new XmlValidate();
         List<String> list = new ArrayList<String>();
 
+		// -home argument must be called before -map is processed
+		for (String arg : args) {
+			if (arg.equals("-debug")) {
+				validator.setDebug(true);
+			} else if (arg.startsWith("-home=")) {
+				validator.setHomeDir(arg.substring(6));
+				break;
+			}
+		}
         for (String arg : args) {
             if (arg.startsWith("-ns=")) {
                 validator.setNamespace(arg.substring(4));
@@ -914,7 +925,7 @@ public class XmlValidate {
             } else if (arg.toLowerCase().startsWith("-maxdump=")) {
                 validator.dumpLimit = Integer.parseInt(arg.substring(9));
             } else if (arg.startsWith("-home=")) {
-                validator.setHomeDir(arg.substring(6));
+                // already handled as special case
             } else if (arg.startsWith("-h")) {
                 usage();
             } else if (arg.startsWith("-")) {
