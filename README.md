@@ -58,6 +58,10 @@ Type: ./gradlew clean test install
 
 Downloaded files (including the Gradle distribution itself) will be stored in the Gradle user home directory (typically "<user_home>/.gradle").
 
+If [Gradle](http://www.gradle.org) is already installed then just run:
+
+./gradle clean test install
+
 Usage
 -----
 
