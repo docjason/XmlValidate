@@ -446,7 +446,7 @@ public class XmlValidate {
 		if (summary) {
 			final String name = root.getName();
 			addStatus("root element=" + name);
-			if (kmlMode && (name == null || !name.equals("kml"))) {
+			if (kmlMode && (name == null || !name.equals("kml") && !KML_ELEMENTS.contains(name))) {
 				res.printFile();
 				out.println("non-kml root element: " + name);
 				addStatus("non-kml root element");
