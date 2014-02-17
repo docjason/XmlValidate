@@ -15,13 +15,16 @@ import java.util.Set;
 public class TestXmlValidate extends TestCase {
 
 	public void testUrlResource() throws MalformedURLException {
-		URL url = new File("data/big.kmz").toURI().toURL();
 		XmlValidate validator = new XmlValidate();
 		// add namespace map to validator
 		validator.setMap(new File("ns.map"));
-		validator.validate(new UrlResource(System.out, url, null));
+		URL url = new File("data/kmz/big.kmz").toURI().toURL();
+		UrlResource resource = new UrlResource(System.out, url, null);
+		assertNotNull(resource.getSource());
+		validator.validate(resource);
 		url = new File("data/kml/placemark.kml").toURI().toURL();
-		validator.validate(new UrlResource(System.out, url, null));
+		resource = new UrlResource(System.out, url, "http://www.opengis.net/kml/2.2");
+		validator.validate(resource);
 		assertEquals(2, validator.getFileCount());
 	}
 
