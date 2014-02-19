@@ -132,9 +132,9 @@ public class FileResource extends Resource {
 			throw ze; // rethrow exception if all attempts fail
 		}
         try {
-            Enumeration e = zf.entries();
+            Enumeration<? extends ZipEntry> e = zf.entries();
             while (e.hasMoreElements()) {
-                ZipEntry entry = (ZipEntry) e.nextElement();
+                ZipEntry entry = e.nextElement();
                 //   Simply find first kml file in the archive
                 //
                 //   Note that KML documentation loosely defines that it takes first root-level KML file
