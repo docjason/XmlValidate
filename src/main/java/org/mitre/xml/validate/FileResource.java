@@ -68,9 +68,9 @@ public class FileResource extends Resource {
 		} catch (ZipException ze) {
 
 			// attempt #2
-			// some KMZ files fail to construct as ZipFile but work using ZipInputStream
-			// URL:  http://www.campinglimens.com/Camping_Limens.kmz
-			// this particular file has invalid timestamps in the zip entry header
+			// some KMZ files fail to open using ZipFile but work using ZipInputStream
+			// URL: http://www.campinglimens.com/Camping_Limens.kmz
+			// file had invalid timestamps in the zip entry header
 			ZipInputStream zis = null;
 			try {
 				zis = new ZipInputStream(new FileInputStream(file));
@@ -106,11 +106,11 @@ public class FileResource extends Resource {
 			try {
 				is = new DataInputStream(new FileInputStream(file));
 				final short hdr = is.readShort();
-				// KMZ/ZIP header start with bytes: PK\0x3\0x4\0x14
+				// KMZ/ZIP header start with bytes: PK\0x3\0x4
 				if (hdr != 0x504B) {
 					// try as KML (XML) file
 					Document doc = builder.build(file);
-					final String msg = "ERROR: " + ze; // e.g. java.util.zip.ZipException: error in opening zip file
+					final String msg = "WARN: " + ze; // e.g. java.util.zip.ZipException: error in opening zip file
 					stats.add(msg);
 					printFile();
 					out.println(msg);
@@ -131,6 +131,9 @@ public class FileResource extends Resource {
 
 			throw ze; // rethrow exception if all attempts fail
 		}
+
+		// ZipFile was successfully created above
+		// try to find the root kml file
         try {
             Enumeration<? extends ZipEntry> e = zf.entries();
             while (e.hasMoreElements()) {
