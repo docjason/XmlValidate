@@ -29,7 +29,7 @@ public class TestKmzFile extends TestCase {
 		// test bad KMZ files: bad-too-large.kmz, nokml.kmz, notKmz.kmz, reallyHtml.kmz
 		for(File f : new File("data/bad").listFiles()) {
 			if (!f.getName().endsWith(".kmz")) continue;
-			boolean expectException = ! "notKmz.kmz".equals(f.getName());
+			boolean expectException = ! f.getName().endsWith("notKmz.kmz");
 			try {
 				checkFile(f);
 				if (expectException) fail("expected exception");
