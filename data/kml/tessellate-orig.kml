@@ -9,7 +9,7 @@ were made to KML 2.2 schema making it stricter
 in a number of places (e.g. changing xsd:all to
 xsd:sequence in LookAt).
 
-The namespace was changed back to 2.1 to make it validate.
+The namespace can be changed back to 2.1 to make it validate.
 
 http://kml-samples.googlecode.com/svn/trunk/kml/Placemark/LineString/tessellate.kml 
 
