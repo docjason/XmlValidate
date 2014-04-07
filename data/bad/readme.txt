@@ -21,6 +21,9 @@ nokml.kmz
 notKmz.kmz
 -- File has .kmz file extension but is not a KMZ but a KML file.
    XML Validate will identify this error and retry file as KML.
+   
+reallyHtml.kmz
+-- File has .kmz extension but is really a HTML file.   
 
 reallyKmz.kml
 -- File has .kml extension but is really a KMZ file.

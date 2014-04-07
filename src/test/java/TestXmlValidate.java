@@ -104,7 +104,7 @@ public class TestXmlValidate extends TestCase {
 		extensionSet.add("kmz");
 		extensionSet.add("gpx");
 		validator.validate(new File("data"));
-		assertEquals(16, validator.getFileCount());
+		assertEquals(17, validator.getFileCount());
 		assertTrue(validator.getErrors() != 0);
 	}
 }

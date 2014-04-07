@@ -1,0 +1,7 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<frameset rows="100%,*" border="0">
+  <frame src="http://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz" frameborder="0" />  
+</frameset>
+</html>
