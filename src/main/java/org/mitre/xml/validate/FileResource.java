@@ -69,6 +69,7 @@ public class FileResource extends Resource {
 
 			// attempt #2
 			// some KMZ files fail to open using ZipFile but work using ZipInputStream
+			// bug was present in JRE 1.6.0_45 but appears to have been fixed in 1.7.0
 			// URL: http://www.campinglimens.com/Camping_Limens.kmz
 			// file had invalid timestamps in the zip entry header
 			ZipInputStream zis = null;
