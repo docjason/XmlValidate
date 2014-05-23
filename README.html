@@ -183,6 +183,12 @@ Note if root element is "kml" and no namespace is specified then KML 2.0 namespa
 If validating many XML documents recommend make local copies of XML Schemas and refer to the local
 file name rather than having to fetch Schema by URL for each document.
 	</td></tr>
+	
+	<tr>
+<td>-schemaLocation=&lt;namespace=location&gt;</td><td>   Add explicit namespace with target schema location (file path or URL).<p/>
+This will appear in the xsi:schemaLocation element if the target namespace is referenced in the XML document.
+	</td></tr>	
+	
 	<tr>
 <td>-ns=&lt;schemaLocation-namespace&gt;</td><td>  Set namespace defined in <em>schemaLocation</em> attribute (e.g. http://earth.google.com/kml/2.1)<p/>
 Without setting this the target schema is assumed to have no namespace and <em>noNamespaceSchemaLocation</em>
@@ -261,6 +267,12 @@ if any errors are found but limit size of each file printed to first 4K:
 	 <em>XmlValidate</em> -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1
 		&nbsp;-schema=http://code.google.com/apis/kml/schema/kml21.xsd
 		&nbsp;http://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz
+</blockquote>
+</li>
+<li>
+Validate by XML document with explicit schema location<br/>
+<blockquote>
+	 <em>XmlValidate</em> -schemaLocation=http://myExtension=ext.xsd example.xml
 </blockquote>
 </li>
 </ol>

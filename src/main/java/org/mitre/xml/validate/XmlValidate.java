@@ -97,6 +97,7 @@ import java.util.*;
  * 			and root element is one of following: { Placemark, GroundOverlay, NetworkLink, ScreenOverlay }
  * 			Added check for KML content in files with .kmz extension. Retry such files as text.
  * 11/14/13 Migrate JDOM 1.1 to JDOM 2.0.5
+ * 05/23/14 Add -schemaLocation argument to add individual namespace-to-schema mappings
  *
  * @see http://www.w3.org/TR/xmlschema-0/
  *
@@ -825,6 +826,9 @@ public class XmlValidate {
         System.err.println("Options:");
         System.err.println("\t[-map=<schema property file>    - schema map properties: namespace to file/URI mappings");
         System.err.println("\t[-schema=<path-to-xml-schema>   - set target schema");
+		System.err.println("\t[-schemaLocation=ns=location    - add namespace to schema location mapping.");
+		System.err.println("\t                                  Location can be a URL or file path to the schema file.");
+		System.err.println("\t                                  Multiple of -schemaLocation arguments may be provided");
         System.err.println("\t[-ns=schemaLocation namespace]  - set schemaLocation namespace (e.g. http://earth.google.com/kml/2.1)");
         System.err.println("\t[-dump[=n]]                     - print reformatted XML documents: dump=0 -> no output [default],");
         System.err.println("\t                                  1 -> print KML on errors only, 2 -> print all inputs");
@@ -849,7 +853,9 @@ public class XmlValidate {
         System.err.println("\t   if any errors are found but limit size of each file printed to first 4K:");
         System.err.println("\t    XmlValidate -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1\n" +
                 "\t\t-schema=http://code.google.com/apis/kml/schema/kml21.xsd\n" +
-                "\t\thttp://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz");
+                "\t\thttp://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz\n");
+		System.err.println("\t5) Validate by XML document with explicit schema location");
+		System.err.println("\t    XmlValidate -schemaLocation=http://myExtension=ext.xsd example.xml\n");
         System.err.println("\nNote: XmlValidate command in examples above is a short-cut to the executable\n" +
                 "such as: java -jar xmlValidate.jar or in equivalent batch file/shell script.");
 
@@ -881,6 +887,7 @@ public class XmlValidate {
 			}
 		}
         for (String arg : args) {
+			String argLwr = arg.toLowerCase();
             if (arg.startsWith("-ns=")) {
                 validator.setNamespace(arg.substring(4));
             } else if (arg.startsWith("-map=")) {
@@ -895,6 +902,18 @@ public class XmlValidate {
                 else
                     validator.setSchema(arg); // treat as URL
                 /// System.err.println("schema=" + validator.schemaUri);
+			} else if (argLwr.startsWith("-schemalocation=")) {
+				String val = arg.substring(arg.indexOf('=')+1);
+				int ind = val.indexOf('=');
+				if (ind > 0) {
+					String ns = val.substring(0,ind);
+					String schemaLocation = val.substring(ind+1);
+					validator.schemaMap.put(ns, schemaLocation);
+					if (validator.debug) validator.out.printf("Set %s -> %s%n", ns, schemaLocation);
+				} else {
+					System.err.println("Invalid argument value: " + arg);
+					usage();
+				}
             } else if (arg.startsWith("-v")) {
                 if (arg.length() == 2 || arg.endsWith("=true"))
                     validator.setVerbose(true);
@@ -920,7 +939,7 @@ public class XmlValidate {
                 validator.dumpLevel = 1;
             } else if (arg.startsWith("-dump=")) {
                 validator.dumpLevel = Integer.parseInt(arg.substring(6));
-            } else if (arg.toLowerCase().startsWith("-maxdump=")) {
+            } else if (argLwr.startsWith("-maxdump=")) {
                 validator.dumpLimit = Integer.parseInt(arg.substring(9));
             } else if (arg.startsWith("-home=")) {
                 // already handled as special case
