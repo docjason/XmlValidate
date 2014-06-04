@@ -39,7 +39,8 @@ import java.util.*;
  * target schema.  If schema namespace not available then it does not validate
  * the document.  This validates document against the actual schema namespace
  * defined in the document as opposed to the other approaches that rewrite
- * the XML documents to a target schema.
+ * the XML documents to a target schema. You can use -schemaLocation argument
+ * to explicitly add an individual schema location mapping.
  *
  *  old: <kml xmlns="http://earth.google.com/kml/2.1">
  *
@@ -828,7 +829,7 @@ public class XmlValidate {
         System.err.println("\t[-schema=<path-to-xml-schema>   - set target schema");
 		System.err.println("\t[-schemaLocation=ns=location    - add namespace to schema location mapping.");
 		System.err.println("\t                                  Location can be a URL or file path to the schema file.");
-		System.err.println("\t                                  Multiple of -schemaLocation arguments may be provided");
+		System.err.println("\t                                  Multiple -schemaLocation arguments may be provided");
         System.err.println("\t[-ns=schemaLocation namespace]  - set schemaLocation namespace (e.g. http://earth.google.com/kml/2.1)");
         System.err.println("\t[-dump[=n]]                     - print reformatted XML documents: dump=0 -> no output [default],");
         System.err.println("\t                                  1 -> print KML on errors only, 2 -> print all inputs");
@@ -855,7 +856,7 @@ public class XmlValidate {
                 "\t\t-schema=http://code.google.com/apis/kml/schema/kml21.xsd\n" +
                 "\t\thttp://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz\n");
 		System.err.println("\t5) Validate by XML document with explicit schema location");
-		System.err.println("\t    XmlValidate -schemaLocation=http://myExtension=ext.xsd example.xml\n");
+		System.err.println("\t    XmlValidate -schemaLocation=http://myExtension=ext.xsd example.xml");
         System.err.println("\nNote: XmlValidate command in examples above is a short-cut to the executable\n" +
                 "such as: java -jar xmlValidate.jar or in equivalent batch file/shell script.");
 
