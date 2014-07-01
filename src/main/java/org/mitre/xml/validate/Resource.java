@@ -44,7 +44,7 @@ public abstract class Resource implements ErrorHandler {
 
     private String schemaNamespace;
 
-    private final String targetFile;
+	protected final String targetFile;
 
     private LineNumberReader lnr;
 

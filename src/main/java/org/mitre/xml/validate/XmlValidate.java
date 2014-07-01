@@ -161,7 +161,7 @@ public class XmlValidate {
     private int validFiles;
 
     private Map<String,Integer> stats = new TreeMap<String,Integer>();
-	private boolean kmlMode;
+	private boolean kmlMode, kmzMode;
 
 	private static final Set<String> KML_ELEMENTS = new HashSet<String>(5);
 
@@ -225,6 +225,10 @@ public class XmlValidate {
 
 	public void setKmlMode(boolean kmlMode) {
 		this.kmlMode = kmlMode;
+	}
+
+	public void setKmzMode(boolean kmzMode) {
+		this.kmzMode = kmzMode;
 	}
 
 	public void setSummary(boolean summary) {
@@ -303,7 +307,11 @@ public class XmlValidate {
                             continue;
                         }
                         // if (f.getName().endsWith(".xml") || f.getName().endsWith(".kml"))
-                        validate(new FileResource(out, f, schemaNamespace));
+						final FileResource resource = new FileResource(out, f, schemaNamespace);
+						validate(resource);
+						if (kmzMode && resource.isKmzFile()) {
+							checkKmzResource(file);
+						}
                     }
                 }
             }
@@ -322,10 +330,31 @@ public class XmlValidate {
 			return;
 		}
 
-        validate(new FileResource(out, file, schemaNamespace));
+		final FileResource resource = new FileResource(out, file, schemaNamespace);
+		validate(resource);
+		if (kmzMode && resource.isKmzFile()) {
+			checkKmzResource(file);
+		}
     }
 
-    public boolean validate(Resource res) {
+	private void checkKmzResource(File file) {
+		KmzExplorer visitor = null;
+		try {
+			visitor = new KmzExplorer(out, file, schemaNamespace);
+			Resource res;
+			while ((res = visitor.next()) != null) {
+				validate(res);
+			}
+		} catch (IOException e) {
+			out.println("\tparse failed: " + e);
+		} finally {
+			if (visitor != null) {
+				visitor.close();
+			}
+		}
+	}
+
+	public boolean validate(Resource res) {
         if (verbose) res.printFile();
         // record time when validation process starts
         if (fileCount++ == 0) startTime = System.currentTimeMillis();
@@ -836,6 +865,7 @@ public class XmlValidate {
         System.err.println("\t                                  if number not specified then 1 is assumed otherwise 0");
         System.err.println("\t-maxDump=n                      - set max length (in bytes) of XML output used for each document in dump");
 		System.err.println("\t[-K]                            - KML mode for special KML validation");
+		System.err.println("\t[-Z]                            - KMZ mode checks all kml files inside KMZ files");
         System.err.println("\t[-kml]                          - validate .kml files only");
         System.err.println("\t[-kmz]                          - validate .kml or .kmz files only");
         System.err.println("\t[-x=ExtensionList]              - add additional file extensions to list (default=xml)");
@@ -929,6 +959,10 @@ public class XmlValidate {
                 validator.extensionSet.clear();
                 validator.extensionSet.add(("kml"));
                 validator.extensionSet.add(("kmz"));
+			} else if (arg.equalsIgnoreCase("-z")) {
+				validator.kmzMode = true;
+				validator.extensionSet.add(("kml"));
+				validator.extensionSet.add(("kmz"));
             } else if (arg.startsWith("-x=")) {
                 if (arg.length() > 3) {
                     validator.extensionSet.addAll(Arrays.asList(arg.substring(3).split(":")));

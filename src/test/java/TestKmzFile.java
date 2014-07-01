@@ -3,6 +3,7 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.mitre.xml.validate.FileResource;
+import org.mitre.xml.validate.XmlValidate;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,15 @@ public class TestKmzFile extends TestCase {
 		}
 	}
 
+	public void testKmzMode() {
+		XmlValidate validator = new XmlValidate();
+		validator.setKmzMode(true);
+		validator.setMap(new File("ns.map"));
+		validator.validate(new File("data/kmz/nested.kmz"));
+		assertEquals(3, validator.getFileCount());
+		assertEquals(0, validator.getErrors());
+	}
+
 	public void testBadKmzFiles() throws JDOMException, IOException {
 		// test bad KMZ files: bad-too-large.kmz, nokml.kmz, notKmz.kmz, reallyHtml.kmz
 		for(File f : new File("data/bad").listFiles()) {
@@ -32,7 +42,9 @@ public class TestKmzFile extends TestCase {
 			boolean expectException = ! f.getName().endsWith("notKmz.kmz");
 			try {
 				checkFile(f);
-				// TODO/REVIEW: following is triggered running on linux platform
+				// REVIEW: following is triggered running on linux platform
+				// presumably due to different version of JRE which no longer
+				// throws an exception when it opens a bad KMZ file.
 				//if (expectException) fail("expected exception");
 			} catch(Exception e) {
 				if (!expectException) fail("unexpected exception");

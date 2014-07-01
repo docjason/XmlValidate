@@ -35,8 +35,9 @@ import java.util.zip.ZipInputStream;
 public class FileResource extends Resource {
     
     private final File file;
+	private boolean isKmzFile;
 
-    public FileResource(PrintStream out, File file, String schemaNamespace) {
+	public FileResource(PrintStream out, File file, String schemaNamespace) {
         super(out, file.toString(), schemaNamespace);
         this.file = file;
     }
@@ -54,6 +55,10 @@ public class FileResource extends Resource {
         return file;
     }
 
+    public boolean isKmzFile() {
+        return isKmzFile;
+   }
+
     private Document buildDocument(SAXBuilder builder) throws JDOMException, IOException {
 		// if KMZ file has .kml extension then out of luck - it will fail to parse
 		// KMZ files must have .kmz extension - case doesn't matter
@@ -62,11 +67,31 @@ public class FileResource extends Resource {
         }
         // otherwise try finding KML in compressed KMZ file
         // NOTE: only the first "root" KML file is fetched. Supporting KML files will not be validated.
-        ZipFile zf;
+        ZipFile zf = null;
         try {
-		 	zf = new ZipFile(file);
-		} catch (ZipException ze) {
+			zf = new ZipFile(file);
+			// attempt #1: try to find the root kml file
+			Enumeration<? extends ZipEntry> e = zf.entries();
+			while (e.hasMoreElements()) {
+				ZipEntry entry = e.nextElement();
+				//   Simply find first kml file in the archive
+				//
+				//   Note that KML documentation loosely defines that it takes first root-level KML file
+				//   in KMZ archive as the main KML document but Google Earth (version 4.3 as of Dec-2008)
+				//   actually takes the first kml file regardless of name (e.g. doc.kml which is convention only)
+				//   and whether its in the root folder or subfolder. Otherwise would need to keep track
+				//   of the first KML found but continue if first KML file is not in the root level then
+				//   backtrack in stream to first KML if no root-level KML is found.
+				if (entry.getName().toLowerCase().endsWith(".kml")) {
+					Document doc = builder.build(zf.getInputStream(entry),
+							file.getAbsoluteFile().toURI().toString());
+					isKmzFile = true;
+					return doc;
+				}
+			}
 
+			throw new IOException("Failed to find KML content in KMZ file");
+		} catch (ZipException ze) {
 			// attempt #2
 			// some KMZ files fail to open using ZipFile but work using ZipInputStream
 			// bug was present in JRE 1.6.0_45 but appears to have been fixed in 1.7.0
@@ -83,8 +108,10 @@ public class FileResource extends Resource {
 						out.println("WARN: ZipFile failed [retry using ZipInputStream]: " + msg);
 						stats.add("WARN: " + msg);
 						warnings++;
-						return builder.build(zis,
-							file.getAbsoluteFile().toURI().toString());
+						Document doc = builder.build(zis,
+								file.getAbsoluteFile().toURI().toString());
+						isKmzFile = true;
+						return doc;
 					}
 				}
 			} catch(IOException ioe) {
@@ -131,30 +158,14 @@ public class FileResource extends Resource {
 			}
 
 			throw ze; // rethrow exception if all attempts fail
+		} finally {
+			if (zf != null)
+				try {
+					zf.close();
+				} catch(IOException ioe) {
+					// ignore
+				}
 		}
+	}
 
-		// ZipFile was successfully created above
-		// try to find the root kml file
-        try {
-            Enumeration<? extends ZipEntry> e = zf.entries();
-            while (e.hasMoreElements()) {
-                ZipEntry entry = e.nextElement();
-                //   Simply find first kml file in the archive
-                //
-                //   Note that KML documentation loosely defines that it takes first root-level KML file
-                //   in KMZ archive as the main KML document but Google Earth (version 4.3 as of Dec-2008)
-                //   actually takes the first kml file regardless of name (e.g. doc.kml which is convention only)
-                //   and whether its in the root folder or subfolder. Otherwise would need to keep track
-                //   of the first KML found but continue if first KML file is not in the root level then
-                //   backtrack in stream to first KML if no root-level KML is found.
-                if (entry.getName().toLowerCase().endsWith(".kml")) {
-                    return builder.build(zf.getInputStream(entry),
-                            file.getAbsoluteFile().toURI().toString());
-                }
-            }
-            throw new IOException("Failed to find KML content in KMZ file");
-        } finally {
-            zf.close();
-        }
-    }
 }
