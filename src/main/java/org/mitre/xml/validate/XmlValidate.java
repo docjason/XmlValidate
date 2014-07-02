@@ -919,11 +919,11 @@ public class XmlValidate {
 		}
         for (String arg : args) {
 			String argLwr = arg.toLowerCase();
-            if (arg.startsWith("-ns=")) {
+            if (argLwr.startsWith("-ns=")) {
                 validator.setNamespace(arg.substring(4));
-            } else if (arg.startsWith("-map=")) {
+            } else if (argLwr.startsWith("-map=")) {
                 validator.setMap(new File(arg.substring(5)));
-            } else if (arg.startsWith("-schema=")) {
+            } else if (argLwr.startsWith("-schema=")) {
                 // if specify schema then drop any map selection
                 validator.schemaMap = null;
                 arg = arg.substring(8);
@@ -945,21 +945,21 @@ public class XmlValidate {
 					System.err.println("Invalid argument value: " + arg);
 					usage();
 				}
-            } else if (arg.startsWith("-v")) {
+            } else if (argLwr.startsWith("-v")) {
                 if (arg.length() == 2 || arg.endsWith("=true"))
                     validator.setVerbose(true);
             } else if (arg.equals("-S")) {
 				validator.summary = true;
 			} else if (arg.equals("-K")) {
 				validator.kmlMode = true;
-            } else if (arg.equals("-kml")) {
+            } else if (argLwr.equals("-kml")) {
                 validator.extensionSet.clear();
                 validator.extensionSet.add(("kml"));
-            } else if (arg.equals("-kmz")) {
+            } else if (argLwr.equals("-kmz")) {
                 validator.extensionSet.clear();
                 validator.extensionSet.add(("kml"));
                 validator.extensionSet.add(("kmz"));
-			} else if (arg.equalsIgnoreCase("-z")) {
+			} else if (argLwr.equals("-z")) {
 				validator.kmzMode = true;
 				validator.extensionSet.add(("kml"));
 				validator.extensionSet.add(("kmz"));
@@ -968,15 +968,15 @@ public class XmlValidate {
                     validator.extensionSet.addAll(Arrays.asList(arg.substring(3).split(":")));
                     System.err.println("Extensions=" + validator.extensionSet);
                 }
-            } else if (arg.equals("-debug")) {
+            } else if (argLwr.equals("-debug")) {
                 validator.setDebug(true);
-            } else if (arg.equals("-d") || arg.equals("-dump")) {
+            } else if (arg.equals("-d") || argLwr.equals("-dump")) {
                 validator.dumpLevel = 1;
-            } else if (arg.startsWith("-dump=")) {
+            } else if (argLwr.startsWith("-dump=")) {
                 validator.dumpLevel = Integer.parseInt(arg.substring(6));
             } else if (argLwr.startsWith("-maxdump=")) {
                 validator.dumpLimit = Integer.parseInt(arg.substring(9));
-            } else if (arg.startsWith("-home=")) {
+            } else if (argLwr.startsWith("-home=")) {
                 // already handled as special case
             } else if (arg.startsWith("-h")) {
                 usage();
