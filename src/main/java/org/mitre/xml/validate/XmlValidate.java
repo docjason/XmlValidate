@@ -310,7 +310,7 @@ public class XmlValidate {
 						final FileResource resource = new FileResource(out, f, schemaNamespace);
 						validate(resource);
 						if (kmzMode && resource.isKmzFile()) {
-							checkKmzResource(file);
+							checkKmzResource(f);
 						}
                     }
                 }
