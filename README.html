@@ -299,36 +299,53 @@ See xv.bat, kml21.bat, and kml22.bat for example usage.
 		<th>Release date</th>
 		<th>Description</th>
 	</tr>
-	<tr>
-		<td class="version">0.1.0</td>
-		<td class="version">04/17/08</td>
-		<td><ul class="changes">
-			<li>Initial Beta release</li>
-			<li>Validates target XML documents against target nonSchemaLocation schemas (e.g. CoT)</li>
-			</ul>
-		</td>
-	</tr>
+
 	<tr class="entry">
-		<td class="version">0.2.0</td>
-		<td class="version">02/01/09</td>
+		<td class="version">1.0.2</td>
+		<td class="version">07/01/14</td>
 		<td><ul class="changes">
-			<li>Added support for Schema namespaces</li>
-			<li>Added context in output for errors/warnings</li>
-			<li>Added -map option</li>
-			<li>Upgrade JDOM to 1.1</li>
-			<li>Upgrade Xerces to 2.9.1</li>
+			<li>Added KmzMode to allow validation of all .kml files inside KMZ files</li>
+			<li>Add -schemaLocation argument to add individual namespace-to-schema mappings</li>
+			<li>Update Xerces to 2.11.0</li>
 		    </ul>
 		</td>
 	</tr>
+	
 	<tr class="entry">
-		<td class="version">0.3.0</td>
-		<td class="version">02/13/09</td>
+		<td class="version">1.0.1</td>
+		<td class="version">11/14/13</td>
 		<td><ul class="changes">
-			<li>Added additional namespace locations in schemaLocation if locations defined in map</li>
-			<li>Added -kml, -kmz and -x options to look for files other than .xml</li>
-			<li>Added support for KMZ files</li>
-			<li>Added support to validate URLs</li>
-			<li>Created README documentation</li>
+			<li>Migrate JDOM from 1.1.3 to 2.0.5</li>
+		    </ul>
+		</td>
+	</tr>
+
+	<tr class="entry">
+		<td class="version">1.0.0</td>
+		<td class="version">04/27/12</td>
+		<td><ul class="changes">
+			<li>Public version with minor cleanup and gradle build</li>
+		    </ul>
+		</td>
+	</tr>
+
+	<tr class="entry">
+		<td class="version">0.4.2</td>
+		<td class="version">03/23/11</td>
+		<td><ul class="changes">
+			<li>Added summary mode (-S) to suppress printing most details per file<BR>
+			and dump at end the summary with counts	for each error/warning<BR>
+			including counts for given root element and default namespace.
+			</li>
+		    </ul>
+		</td>
+	</tr>
+	
+	<tr class="entry">
+		<td class="version">0.4.1</td>
+		<td class="version">08/23/10</td>
+		<td><ul class="changes">
+			<li>Added assignment of namespace locations to non-root elements in -map mode</li>
 		    </ul>
 		</td>
 	</tr>
@@ -347,41 +364,38 @@ to validation errors in the target XML source.</li>
 	</tr>
 
 	<tr class="entry">
-		<td class="version">0.4.1</td>
-		<td class="version">08/23/10</td>
+		<td class="version">0.3.0</td>
+		<td class="version">02/13/09</td>
 		<td><ul class="changes">
-			<li>Added assignment of namespace locations to non-root elements in -map mode</li>
+			<li>Added additional namespace locations in schemaLocation if locations defined in map</li>
+			<li>Added -kml, -kmz and -x options to look for files other than .xml</li>
+			<li>Added support for KMZ files</li>
+			<li>Added support to validate URLs</li>
+			<li>Created README documentation</li>
 		    </ul>
 		</td>
 	</tr>
 
 	<tr class="entry">
-		<td class="version">0.4.2</td>
-		<td class="version">03/23/11</td>
+		<td class="version">0.2.0</td>
+		<td class="version">02/01/09</td>
 		<td><ul class="changes">
-			<li>Added summary mode (-S) to suppress printing most details per file<BR>
-			and dump at end the summary with counts	for each error/warning<BR>
-			including counts for given root element and default namespace.
-			</li>
+			<li>Added support for Schema namespaces</li>
+			<li>Added context in output for errors/warnings</li>
+			<li>Added -map option</li>
+			<li>Upgrade JDOM to 1.1</li>
+			<li>Upgrade Xerces to 2.9.1</li>
 		    </ul>
 		</td>
 	</tr>
-	
-	<tr class="entry">
-		<td class="version">1.0.0</td>
-		<td class="version">04/27/12</td>
+
+	<tr>
+		<td class="version">0.1.0</td>
+		<td class="version">04/17/08</td>
 		<td><ul class="changes">
-			<li>Public version with minor cleanup and gradle build</li>
-		    </ul>
-		</td>
-	</tr>
-	
-	<tr class="entry">
-		<td class="version">1.0.1</td>
-		<td class="version">11/14/13</td>
-		<td><ul class="changes">
-			<li>Migrate JDOM from 1.1.3 to 2.0.5</li>
-		    </ul>
+			<li>Initial Beta release</li>
+			<li>Validates target XML documents against target nonSchemaLocation schemas (e.g. CoT)</li>
+			</ul>
 		</td>
 	</tr>
 
