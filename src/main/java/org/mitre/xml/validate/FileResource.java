@@ -66,7 +66,8 @@ public class FileResource extends Resource {
             return builder.build(file);
         }
         // otherwise try finding KML in compressed KMZ file
-        // NOTE: only the first "root" KML file is fetched. Supporting KML files will not be validated.
+        // NOTE: only the first "root" KML file is fetched. Supporting KML files will not be validated here.
+		// If KmzMode is enabled then all KML entries inside KMZ file will be extracted using KmzExplorer class.
         ZipFile zf = null;
         try {
 			zf = new ZipFile(file);
@@ -83,10 +84,9 @@ public class FileResource extends Resource {
 				//   of the first KML found but continue if first KML file is not in the root level then
 				//   backtrack in stream to first KML if no root-level KML is found.
 				if (entry.getName().toLowerCase().endsWith(".kml")) {
-					Document doc = builder.build(zf.getInputStream(entry),
-							file.getAbsoluteFile().toURI().toString());
 					isKmzFile = true;
-					return doc;
+					return builder.build(zf.getInputStream(entry),
+							file.getAbsoluteFile().toURI().toString());
 				}
 			}
 
@@ -108,10 +108,9 @@ public class FileResource extends Resource {
 						out.println("WARN: ZipFile failed [retry using ZipInputStream]: " + msg);
 						stats.add("WARN: " + msg);
 						warnings++;
-						Document doc = builder.build(zis,
-								file.getAbsoluteFile().toURI().toString());
 						isKmzFile = true;
-						return doc;
+						return builder.build(zis,
+								file.getAbsoluteFile().toURI().toString());
 					}
 				}
 			} catch(IOException ioe) {
