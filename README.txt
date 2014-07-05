@@ -140,4 +140,9 @@ your XmlValidate/schemas directory as reference them like this:
 or add any directory of your choosing and reference with an absolute path:
  http://java.sun.com/xml/ns/javaee=C:/xml/schemas/web-app_2_5.xsd
 
+If you want to make a one-time mapping to XML Schema or override the mappings using
+-schemaLocation command-line argument.
+Example usage:
+ xv -schemaLocation=http://java.sun.com/xml/ns/javaee=C:/xml/schemas/web-app_2_5.xsd web.xml
+
 --
