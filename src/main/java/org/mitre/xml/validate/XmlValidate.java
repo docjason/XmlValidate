@@ -160,7 +160,7 @@ public class XmlValidate {
     private PrintStream out = System.out;
     private int validFiles;
 
-    private Map<String,Integer> stats = new TreeMap<String,Integer>();
+    private final Map<String,Integer> stats = new TreeMap<String,Integer>();
 	private boolean kmlMode, kmzMode;
 
 	private static final Set<String> KML_ELEMENTS = new HashSet<String>(5);
@@ -961,7 +961,6 @@ public class XmlValidate {
                 validator.extensionSet.add(("kmz"));
 			} else if (argLwr.equals("-z")) {
 				validator.kmzMode = true;
-				validator.extensionSet.add(("kml"));
 				validator.extensionSet.add(("kmz"));
             } else if (arg.startsWith("-x=")) {
                 if (arg.length() > 3) {
