@@ -17,12 +17,13 @@ jar {
 }
 
 task install(dependsOn: jar, type: Copy) {
-	// copy dependent jars into lib directory for .bat files to run
+    // copy dependent jars into lib directory for .bat files to run
+    description 'Copies the dependencies to the build/libs directory.'
     into "$buildDir/libs"
     from configurations.runtime
 }
 
-task wrapper(type: Wrapper) {  gradleVersion = "1.3"}
+task wrapper(type: Wrapper) {  gradleVersion = "1.3" }
 
 dependencies {	
 

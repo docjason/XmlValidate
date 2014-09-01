@@ -254,26 +254,26 @@ This is helpful when validating large collection of files where output would be 
 <li>
 To check all .kml files against target KML 2.2 schema regardless of default schema used:
 <blockquote>
-         <em>XmlValidate</em> -kml -schema C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2 &nbsp;C:/pathToMyKmlFiles
+         <em>xv</em> -kml -schema C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2 &nbsp;C:/pathToMyKmlFiles
 </blockquote>
 </li>
 <li>
 To check all CoT .xml files against CoT Schema:
 <blockquote>
-         <em>XmlValidate</em> -schema C:/pathToXsd/event.xsd C:/pathToMyCoTFiles
+         <em>xv</em> -schema C:/pathToXsd/event.xsd C:/pathToMyCoTFiles
 </blockquote>
 </li>
 <li>
 To check kml and kmz files against local schemas as defined in KML files:
 <blockquote>
-         <em>XmlValidate</em> -map=ns.map C:/pathToMyKmlFiles
+         <em>xv</em> -map=ns.map C:/pathToMyKmlFiles
 </blockquote>
 </li>
 <li>
 Validate by URL for KML and target schema and print KML content<br/>
 if any errors are found but limit size of each file printed to first 4K:
 <blockquote>
-	 <em>XmlValidate</em> -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1
+	 <em>xv</em> -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1
 		&nbsp;-schema=http://code.google.com/apis/kml/schema/kml21.xsd
 		&nbsp;http://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz
 </blockquote>
@@ -281,12 +281,12 @@ if any errors are found but limit size of each file printed to first 4K:
 <li>
 Validate by XML document with explicit schema location<br/>
 <blockquote>
-	 <em>XmlValidate</em> -schemaLocation=http://myExtension=ext.xsd example.xml
+	 <em>xv</em> -schemaLocation=http://myExtension=ext.xsd example.xml
 </blockquote>
 </li>
 </ol>
 <blockquote>
-<Strong>Note:</Strong> <em>XmlValidate</em> command in examples above is a short-cut to the executable
+<Strong>Note:</Strong> <em>xv</em> command in examples above is a short-cut to the executable
 command using java and XmlValidate.jar on the CLASSPATH or by using the equivalent batch file/shell script.
 See xv.bat, kml21.bat, and kml22.bat for example usage.
 </blockquote>
