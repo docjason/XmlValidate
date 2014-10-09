@@ -14,5 +14,5 @@ java %OPTS% -classpath "%CLASSPATH%" org.mitre.xml.validate.XmlValidate -kml -ns
 goto end
 
 :rungradle
-echo Must run "gradle install" from XmlValidate home directory to configure batch file environment
+echo Must run "gradlew install" from XmlValidate home directory to configure batch file environment
 :end
