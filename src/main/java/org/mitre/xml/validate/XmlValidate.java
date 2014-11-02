@@ -14,15 +14,15 @@
  */
 package org.mitre.xml.validate;
 
-import org.jdom2.*;
-import org.jdom2.input.JDOMParseException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.input.sax.XMLReaders;
-
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+
+import org.jdom2.*;
+import org.jdom2.input.JDOMParseException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.input.sax.XMLReaders;
 
 /**
  * XmlValidate validates XML documents in several methods depending on the task
@@ -718,8 +718,8 @@ public class XmlValidate {
     public void setMap(File file) {
         BufferedReader in = null;
         try {
-            in = new BufferedReader(new java.io.FileReader(file));
-            schemaMap = new java.util.HashMap<String, String>();
+            in = new BufferedReader(new FileReader(file));
+            schemaMap = new HashMap<String, String>();
             String s;
             while ((s = in.readLine()) != null) {
                 if (s.length() == 0 || s.startsWith("#"))
@@ -900,7 +900,7 @@ public class XmlValidate {
     /**
      * Main program entry point.
      */
-    public static void main (String [] args) {
+    public static void main (String[] args) {
 
         if (args.length < 2) {
             usage();
@@ -934,11 +934,11 @@ public class XmlValidate {
                     validator.setSchema(arg); // treat as URL
                 /// System.err.println("schema=" + validator.schemaUri);
 			} else if (argLwr.startsWith("-schemalocation=")) {
-				String val = arg.substring(arg.indexOf('=')+1);
+				String val = arg.substring(arg.indexOf('=') + 1);
 				int ind = val.indexOf('=');
 				if (ind > 0) {
 					String ns = val.substring(0,ind);
-					String schemaLocation = val.substring(ind+1);
+					String schemaLocation = val.substring(ind + 1);
 					validator.schemaMap.put(ns, schemaLocation);
 					if (validator.debug) validator.out.printf("Set %s -> %s%n", ns, schemaLocation);
 				} else {
@@ -954,14 +954,14 @@ public class XmlValidate {
 				validator.kmlMode = true;
             } else if (argLwr.equals("-kml")) {
                 validator.extensionSet.clear();
-                validator.extensionSet.add(("kml"));
+                validator.extensionSet.add("kml");
             } else if (argLwr.equals("-kmz")) {
                 validator.extensionSet.clear();
-                validator.extensionSet.add(("kml"));
-                validator.extensionSet.add(("kmz"));
+                validator.extensionSet.add("kml");
+                validator.extensionSet.add("kmz");
 			} else if (argLwr.equals("-z")) {
 				validator.kmzMode = true;
-				validator.extensionSet.add(("kmz"));
+				validator.extensionSet.add("kmz");
             } else if (arg.startsWith("-x=")) {
                 if (arg.length() > 3) {
                     validator.extensionSet.addAll(Arrays.asList(arg.substring(3).split(":")));
