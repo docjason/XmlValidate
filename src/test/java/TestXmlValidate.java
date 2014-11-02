@@ -16,6 +16,7 @@ public class TestXmlValidate extends TestCase {
 
 	public void testUrlResource() throws MalformedURLException {
 		XmlValidate validator = new XmlValidate();
+        validator.setSummary(true);
 		// add namespace map to validator
 		validator.setMap(new File("ns.map"));
 		URL url = new File("data/kmz/big.kmz").toURI().toURL();
@@ -26,16 +27,20 @@ public class TestXmlValidate extends TestCase {
 		resource = new UrlResource(System.out, url, "http://www.opengis.net/kml/2.2");
 		validator.validate(resource);
 		assertEquals(2, validator.getFileCount());
+        assertEquals(0, validator.getErrors());
+        assertEquals(0, validator.getWarnings());
 	}
 
 	public void testBadXml() {
 		XmlValidate validator = new XmlValidate();
-		validator.validate(new File("data/bad/bad.xml"));
-		validator.setMap(new File("ns.map"));
-		validator.setSummary(true);
+        validator.setSummary(true);
+        validator.setMap(new File("ns.map"));
+        validator.validate(new File("data/bad/bad.xml"));
 		validator.dumpStatus();
 		assertEquals(1, validator.getFileCount());
-	}
+        assertEquals(1, validator.getErrors());
+        assertEquals(0, validator.getWarnings());
+    }
 
 	public void testBadKml() {
 		XmlValidate validator = new XmlValidate();
@@ -46,6 +51,7 @@ public class TestXmlValidate extends TestCase {
 		validator.dumpStatus();
 		assertEquals(1, validator.getFileCount());
 		assertTrue(validator.getErrors() != 0);
+        assertEquals(0, validator.getWarnings());
 	}
 
 	public void testCotXml() {
@@ -57,7 +63,7 @@ public class TestXmlValidate extends TestCase {
 		validator.setDebug(true);
 		validator.setHomeDir(".");
 		validator.setDumpLevel(2);
-		validator.validate(new File("data/xml/cot.xml"));
+        validator.validate(new File("data/xml/cot.xml"));
 		//validator.setSummary(true);
 		validator.dumpStatus();
 		assertEquals(1, validator.getFileCount());
@@ -106,5 +112,6 @@ public class TestXmlValidate extends TestCase {
 		validator.validate(new File("data"));
 		assertEquals(18, validator.getFileCount());
 		assertTrue(validator.getErrors() != 0);
-	}
+        assertEquals(1, validator.getWarnings());
+    }
 }
