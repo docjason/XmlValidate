@@ -40,30 +40,49 @@ public class TestFileResource {
     }
 
     @Test
+    public void testKml() throws JDOMException, IOException {
+        File file = new File("data/kml/tessellate22.kml");
+        FileResource res = getResource(file);
+        res.setSummary(true);
+        validatingBuilder.setErrorHandler(res);
+        Document doc = res.getDocument(validatingBuilder);
+        assertNotNull(doc);
+        assertFalse(res.isKmzFile());
+
+        assertEquals(0, res.getErrors());
+        assertEquals(0, res.getWarnings());
+        assertEquals(0, res.getStats().size());
+    }
+
+    @Test
     public void testBadKml() throws JDOMException, IOException {
         File file = new File("data/bad/badColor.kml");
+        FileResource res = getResource(file);
+        res.setSummary(true);
+        validatingBuilder.setErrorHandler(res);
+        Document doc = res.getDocument(validatingBuilder);
+        assertNotNull(doc);
+        assertFalse(res.isKmzFile());
+
+        assertEquals(14, res.getErrors());
+        assertEquals(0, res.getWarnings());
+        assertEquals(5, res.getStats().size());
+    }
+
+    private FileResource getResource(File file) throws JDOMException, IOException {
         FileResource res = new FileResource(System.out, file, "http://www.opengis.net/kml/2.2");
         assertSame(file, res.getFile());
 
         // add schema location to root XML element so errors/warnings get generated
         Document doc = res.getDocument(builder);
         Element root = doc.getRootElement();
-        root.setAttribute("schemaLocation", "http://www.opengis.net/kml/2.2 ./schemas/kml22.xsd", XmlValidate.xsiNamespace);
+        root.setAttribute("schemaLocation", "http://www.opengis.net/kml/2.2 " +
+                new File("schemas/kml22.xsd").toURI().toString(), XmlValidate.xsiNamespace);
         File outFile = new File("build/" + file.getName());
         FileWriter writer = new FileWriter(outFile);
         writer.write(res.getXmlContent());
         writer.close();
-
-        res = new FileResource(System.out, outFile, "http://www.opengis.net/kml/2.2");
-        res.setSummary(true);
-        validatingBuilder.setErrorHandler(res);
-        doc = res.getDocument(validatingBuilder);
-        assertNotNull(doc);
-        assertFalse(res.isKmzFile());
-
-        assertEquals(2, res.getErrors());
-        assertEquals(22, res.getWarnings());
-        assertFalse(res.getStats().isEmpty());
+        return new FileResource(System.out, outFile, "http://www.opengis.net/kml/2.2");
     }
 
     @After
