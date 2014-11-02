@@ -79,6 +79,14 @@ public abstract class Resource implements ErrorHandler {
 
     public abstract String getSource();
 
+    public int getErrors() {
+        return errors;
+    }
+
+    public int getWarnings() {
+        return warnings;
+    }
+
     public void printFile() {
         if (!printed) {
             if (targetFile != null) out.println("\nCheck: " + targetFile);
@@ -247,4 +255,5 @@ public abstract class Resource implements ErrorHandler {
 	public boolean isPrinted() {
 		return printed;
 	}
+
 }

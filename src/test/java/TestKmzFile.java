@@ -29,10 +29,12 @@ public class TestKmzFile extends TestCase {
 	public void testKmzMode() {
 		XmlValidate validator = new XmlValidate();
 		validator.setKmzMode(true);
+        validator.setSummary(true);
 		validator.setMap(new File("ns.map"));
 		validator.validate(new File("data/kmz/nested.kmz"));
 		assertEquals(3, validator.getFileCount());
 		assertEquals(0, validator.getErrors());
+        assertEquals(0, validator.getWarnings());
 	}
 
 	public void testBadKmzFiles() throws JDOMException, IOException {
@@ -55,8 +57,13 @@ public class TestKmzFile extends TestCase {
 	private void checkFile(File file) throws JDOMException, IOException {
 		FileResource res = new FileResource(System.out, file, "http://www.opengis.net/kml/2.2");
 		assertNotNull(res.getFile());
-		Document doc = res.getDocument(builder);
+        Document doc = res.getDocument(builder);
 		assertNotNull(doc);
+        final boolean isNotKmzFile = file.getName().endsWith("notKmz.kmz");
+        assertEquals(!isNotKmzFile, res.isKmzFile());
+        assertEquals(0, res.getErrors());
+        assertEquals(isNotKmzFile ? 1  : 0, res.getWarnings());
+        assertEquals(!isNotKmzFile, res.getStats().isEmpty());
 		// kml or Placemark
 		String name = doc.getRootElement().getName();
 		if (!name.equals("kml") && !name.equals("Placemark"))
