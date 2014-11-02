@@ -4,5 +4,3 @@ script: gradle test
 notifications:
     on_success: change
     on_failure: change
-before_install:
- - chmod +x gradlew
