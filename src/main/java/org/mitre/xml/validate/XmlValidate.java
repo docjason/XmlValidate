@@ -127,8 +127,9 @@ public class XmlValidate {
     protected static final String CONTINUE_AFTER_FATAL_FEATURE =
             "http://apache.org/xml/features/continue-after-fatal-error"; // [FALSE]
 
-    private static final Namespace xsiNamespace = Namespace.getNamespace("xsi",
+    protected static final Namespace xsiNamespace = Namespace.getNamespace("xsi",
             "http://www.w3.org/2001/XMLSchema-instance" );
+
 	private static final String VALID_PREFIX = "*valid* ";
 	private static final String VALID_XMLNS_PREFIX = VALID_PREFIX + "xmlns=";
 	// private static final String NS_GOOGLE_KML_EXT = "http://www.google.com/kml/ext/2.2";
@@ -160,7 +161,7 @@ public class XmlValidate {
     private PrintStream out = System.out;
     private int validFiles;
 
-    private final Map<String,Integer> stats = new TreeMap<String,Integer>();
+    private final Map<String, Integer> stats = new TreeMap<String,Integer>();
 	private boolean kmlMode, kmzMode;
 
 	private static final Set<String> KML_ELEMENTS = new HashSet<String>(5);
