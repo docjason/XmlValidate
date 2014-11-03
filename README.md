@@ -54,13 +54,15 @@ If the error is in the XML Schema not the instance document then the context wil
 Building with Gradle
 --------------------
 
-Type: ./gradlew clean test install
+Type: ./gradlew test install
 
-Downloaded files (including the Gradle distribution itself) will be stored in the Gradle user home directory (typically "<user_home>/.gradle").
+The first time you run this it will download and install gradle. Downloaded files (including the Gradle
+distribution itself) will be stored in the Gradle user home directory (typically "<user_home>/.gradle").
+Subsequent runs will be much faster.
 
 If [Gradle](http://www.gradle.org) is already installed then just run:
 
-./gradle clean test install
+./gradle test install
 
 Usage
 -----
