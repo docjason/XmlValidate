@@ -712,6 +712,11 @@ public class XmlValidate {
         }
     }
 
+	public void addSchemaLocation(String ns, String schemaLocation) {
+		if (schemaMap == null) schemaMap = new HashMap<String, String>();
+		schemaMap.put(ns, schemaLocation);
+	}
+
     /**
      *
      * @param file
@@ -940,7 +945,7 @@ public class XmlValidate {
 				if (ind > 0) {
 					String ns = val.substring(0,ind);
 					String schemaLocation = val.substring(ind + 1);
-					validator.schemaMap.put(ns, schemaLocation);
+					validator.addSchemaLocation(ns, schemaLocation);
 					if (validator.debug) validator.out.printf("Set %s -> %s%n", ns, schemaLocation);
 				} else {
 					System.err.println("Invalid argument value: " + arg);
