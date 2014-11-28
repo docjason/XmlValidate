@@ -47,7 +47,7 @@ schemas, and batch files are in the correct locations.
 	> bin\kml21 -kmz data
 
 	Errors: 0  Warnings: 0  Files: 5  Time: 328 ms
-	Valid files 5/5 (100%)
+	Valid files 3/3 (100%)
 
 	Same as running the following:
 	> bin\xv -kmz -ns=http://earth.google.com/kml/2.1 -schema=schemas\kml21.xsd data
@@ -98,8 +98,11 @@ schemas, and batch files are in the correct locations.
 	Check: data\kmz\big.kmz
 		 *OK*
 
-	Errors: 1  Warnings: 0  Files: 11  Time: 895 ms
-	Valid files 10/11 (91%)
+	Check: data\kmz\nested.kmz
+         *OK*
+
+	Errors: 1  Warnings: 0  Files: 12  Time: 895 ms
+	Valid files 11/12 (92%)
 
 
 	Notice the tessellate-orig.kml example has the wrong namespace
@@ -114,7 +117,7 @@ Running
 Next run XmlValidate on your own XML documents using appropriate
 .bat file (xv.bat, kml22.bat, etc.).
 
-Run xv.bat on your favoriate XML files by filename, directory, or URL.
+Run xv.bat on your favorite XML files by filename, directory, or URL.
 
 
 Configuration
