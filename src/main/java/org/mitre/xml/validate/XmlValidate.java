@@ -294,7 +294,7 @@ public class XmlValidate {
                     if (!f.getName().equals(".svn")) // don't recurse .svn directories
                         validate(f);
                 } else {
-                    String name = f.getName().toLowerCase();
+                    String name = f.getName().toLowerCase(Locale.ROOT);
                     int ind = name.lastIndexOf('.');
                     if (ind != -1 && extensionSet.contains(name.substring(ind + 1))) {
                         if (f.length() == 0) {
@@ -483,7 +483,7 @@ public class XmlValidate {
 				out.println("non-kml root element: " + name);
 				addStatus("non-kml root element");
 			}
-			if (rootNS == null /* || rootNS.getURI() == null */) {
+			if (rootNS == null) {
 				// can rootNS be null? or if no default namespace do we get the static default namespace object ??
 				// is there a distinction btwn no root namespace and no default namespace ??
 				res.printFile();
@@ -492,7 +492,7 @@ public class XmlValidate {
 				res.setDefaultNamespace("no root namespace");
 			} else {
 				final String uri = rootNS.getURI();
-				if (uri.length() == 0) {
+				if (uri.isEmpty()) {
 					res.printFile();
 					out.println("no default namespace");
 					addStatus("xmlns=no default namespace");
@@ -924,7 +924,7 @@ public class XmlValidate {
 			}
 		}
         for (String arg : args) {
-			String argLwr = arg.toLowerCase();
+			String argLwr = arg.toLowerCase(Locale.ROOT);
             if (argLwr.startsWith("-ns=")) {
                 validator.setNamespace(arg.substring(4));
             } else if (argLwr.startsWith("-map=")) {
