@@ -483,7 +483,7 @@ public class XmlValidate {
 				out.println("non-kml root element: " + name);
 				addStatus("non-kml root element");
 			}
-			if (rootNS == null || rootNS.getURI() == null) {
+			if (rootNS == null /* || rootNS.getURI() == null */) {
 				// can rootNS be null? or if no default namespace do we get the static default namespace object ??
 				// is there a distinction btwn no root namespace and no default namespace ??
 				res.printFile();
