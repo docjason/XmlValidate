@@ -862,7 +862,7 @@ public class XmlValidate {
         System.err.println("Options:");
         System.err.println("\t[-map=<schema property file>    - schema map properties: namespace to file/URI mappings");
         System.err.println("\t[-schema=<path-to-xml-schema>   - set target schema");
-		System.err.println("\t[-schemaLocation=ns=location    - add namespace to schema location mapping.");
+		System.err.println("\t[-schemaLocation=ns=location    - add/override namespace to schema location mapping.");
 		System.err.println("\t                                  Location can be a URL or file path to the schema file.");
 		System.err.println("\t                                  Multiple -schemaLocation arguments may be provided");
         System.err.println("\t[-ns=schemaLocation namespace]  - set schemaLocation namespace (e.g. http://earth.google.com/kml/2.1)");
