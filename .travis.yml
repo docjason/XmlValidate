@@ -1,6 +1,7 @@
 language: java
 install: gradle -q assemble
 script: gradle test
+sudo: false
 notifications:
     on_success: change
     on_failure: change
