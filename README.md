@@ -9,7 +9,7 @@ extensions. First documents are checked as being well-formed XML.
 If parsing XML with non-validating parser fails then validation for that
 file stops.
 
-Here are three ways to validate XML documents using *XmlValidate*:
+There are three ways to validate XML documents using *XmlValidate*:
 
 1. The *-map* option maps schema namespaces to given target schema locations.
 It rewrites XML with location of schema instance document then validates against
@@ -24,7 +24,7 @@ the XML documents to any target schema.
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://earth.google.com/kml/2.1 file:/C:/xml/kml21.xsd"&gt;
  
-Note if root element is "kml" and no namespace is specified then KML 2.0 namespace is used to validate document.
+ Note if root element is "kml" and no namespace is specified then KML 2.0 namespace is used to validate document.
  
 2. Specifing a schema without a namespace implies noNamespaceSchemaLocation attribute should be added to all XML documents and validate against that schema.
   no namespace schema:
