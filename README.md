@@ -9,7 +9,7 @@ extensions. First documents are checked as being well-formed XML.
 If parsing XML with non-validating parser fails then validation for that
 file stops.
 
-There are three ways to validate XML documents using *XmlValidate*:
+Here are three ways to validate XML documents using *XmlValidate*:
 
 1. The *-map* option maps schema namespaces to given target schema locations.
 It rewrites XML with location of schema instance document then validates against
@@ -91,7 +91,7 @@ See xv.bat, kml21.bat, and kml22.bat for example usage.
 License
 -------
 
-Copyright 2009 The MITRE Corporation
+Copyright 2009-2017 The MITRE Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
