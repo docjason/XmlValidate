@@ -33,7 +33,8 @@ the XML documents to any target schema.
       xsi:noNamespaceSchemaLocation="C:/cot/schema/Event.xsd"&gt;
  
 3. And finally specify -ns and -schema options to provide a target namespace URI and schema location.  All XML documents specified in search location(s) will be rewritten and the target schemaLocation will be used regardless of the default namespace of that document.  So for example KML 2.1 documents can be validated against the 2.2 schema, and vice versa.
-   old: &lt;kml xmlns="http://earth.google.com/kml/2.1"&gt;
+
+  old: &lt;kml xmlns="http://earth.google.com/kml/2.1"&gt;
 
   new: &lt;kml xmlns="http://www.opengis.net/kml/2.2"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
