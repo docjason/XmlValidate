@@ -75,16 +75,16 @@ Examples
 
 1. To check all .kml files against target KML 2.2 schema regardless of default schema used:
 
-  XmlValidate -kml -schema C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2  C:/pathToMyKmlFiles
+  xv -kml -schema C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2  C:/pathToMyKmlFiles
  
 2. To check kml and kmz files against local schemas as defined in KML files: 
 
-  XmlValidate -kmz -map=ns.map C:/pathToMyKmlFiles 
+  xv -kmz -map=ns.map C:/pathToMyKmlFiles
 
 3. Validate by URL for KML and target schema and print KML content
    if any errors are found but limit size of each file printed to first 4K: 
    
-  XmlValidate -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1  -schema=http://code.google.com/apis/kml/schema/kml21.xsd  http://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz
+  xv -dump -maxDump=4096 -ns=http://earth.google.com/kml/2.1  -schema=http://code.google.com/apis/kml/schema/kml21.xsd  http://kml-samples.googlecode.com/svn/trunk/kml/kmz/simple/big.kmz
  
 Note: XmlValidate command in examples above is a short-cut to the executable command using java and XmlValidate.jar on the CLASSPATH or by using the equivalent batch file/shell script.
 See xv.bat, kml21.bat, and kml22.bat for example usage.
