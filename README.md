@@ -39,12 +39,6 @@ the XML documents to any target schema.
      new: &lt;kml xmlns="http://www.opengis.net/kml/2.2"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.opengis.net/kml/2.2 file:/C:/xml/kml22.xsd"&gt;
- 
-Note that XML is reformatted so errors/warnings with line/column numbers are respect
-to the reformatted content not the original so context is printed at that line/column
-number after each error in order that errors can be tracked down and corrected in original XML document.
-If you want the reformatted XML document printed then use -dump mode. If the error is in the XML Schema
-not the instance document then the context will not be printed.
 
 Note that XML is reformatted so errors/warnings with line/column numbers are respect to
 the reformatted content not the original so context is printed at that line/column number
