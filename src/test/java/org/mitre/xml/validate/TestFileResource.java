@@ -4,6 +4,8 @@ import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.input.sax.XMLReaders;
 import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,9 +19,10 @@ import static org.junit.Assert.*;
  */
 public class TestFileResource {
 
-    private final SAXBuilder builder, validatingBuilder;
+    private static SAXBuilder builder, validatingBuilder;
 
-    public TestFileResource() {
+    @BeforeClass
+    public static void setUp() throws Exception {
         builder = new SAXBuilder();
 
         validatingBuilder = new SAXBuilder(XMLReaders.XSDVALIDATING);
@@ -30,6 +33,19 @@ public class TestFileResource {
         validatingBuilder.setFeature(XmlValidate.LOAD_EXTERNAL_DTD, false);
         validatingBuilder.setFeature("http://xml.org/sax/features/external-general-entities", false);
         validatingBuilder.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+    }
+
+    @AfterClass
+    public static void tearDownAfterClass() {
+        builder = null;
+        validatingBuilder = null;
+    }
+
+    @After
+    public void tearDown() {
+        if (validatingBuilder != null) {
+            validatingBuilder.setErrorHandler(null);
+        }
     }
 
     @Test(expected = JDOMException.class)
@@ -83,11 +99,6 @@ public class TestFileResource {
         writer.write(res.getXmlContent());
         writer.close();
         return new FileResource(System.out, outFile, "http://www.opengis.net/kml/2.2");
-    }
-
-    @After
-    public void tearDown() {
-        validatingBuilder.setErrorHandler(null);
     }
 
 }
