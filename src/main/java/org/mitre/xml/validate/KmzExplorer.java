@@ -18,10 +18,7 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -30,7 +27,7 @@ import java.util.zip.ZipFile;
  * @author Jason Mathews, MITRE Corp.
  * Created on 6/30/2014.
  */
-public class KmzExplorer {
+public class KmzExplorer implements Closeable {
 
 	private final File file;
 	private final PrintStream out;

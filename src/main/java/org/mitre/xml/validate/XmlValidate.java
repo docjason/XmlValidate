@@ -339,19 +339,15 @@ public class XmlValidate {
     }
 
 	private void checkKmzResource(File file) {
-		KmzExplorer visitor = null;
-		try {
-			visitor = new KmzExplorer(out, file, schemaNamespace);
+		try(
+			KmzExplorer visitor = new KmzExplorer(out, file, schemaNamespace);
+		) {
 			Resource res;
 			while ((res = visitor.next()) != null) {
 				validate(res);
 			}
 		} catch (IOException e) {
 			out.println("\tparse failed: " + e);
-		} finally {
-			if (visitor != null) {
-				visitor.close();
-			}
 		}
 	}
 
@@ -519,7 +515,7 @@ public class XmlValidate {
                 return null;
             }
             schemaNamespace = rootNS.getURI();
-            if (schemaNamespace == null || schemaNamespace.length() == 0) {
+            if (schemaNamespace == null || schemaNamespace.isEmpty()) {
 				if (!summary) {
 					res.printFile();
 					out.println("INFO: no root namespace");
