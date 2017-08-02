@@ -68,9 +68,9 @@ public class FileResource extends Resource {
         // otherwise try finding KML in compressed KMZ file
         // NOTE: only the first "root" KML file is fetched. Supporting KML files will not be validated here.
 		// If KmzMode is enabled then all KML entries inside KMZ file will be extracted using KmzExplorer class.
-        ZipFile zf = null;
-        try {
-			zf = new ZipFile(file);
+        try(
+			ZipFile zf = new ZipFile(file)
+		) {
 			// attempt #1: try to find the root kml file
 			Enumeration<? extends ZipEntry> e = zf.entries();
 			while (e.hasMoreElements()) {
@@ -129,9 +129,10 @@ public class FileResource extends Resource {
 			// examples:
 			//  http://www.strandbewertung.de/strandbewertung.kmz => Content-Type: application/vnd.google-earth.kmz
 			//  http://hemendikhortik.zxq.net/Eslovenia_en.kmz => Content-Type: text/plain
-			DataInputStream is = null;
-			try {
-				is = new DataInputStream(new FileInputStream(file));
+			try(
+				FileInputStream fis = new FileInputStream(file);
+				DataInputStream is = new DataInputStream(fis)
+			) {
 				final short hdr = is.readShort();
 				// KMZ/ZIP header start with bytes: PK\0x3\0x4
 				if (hdr != 0x504B) {
@@ -147,23 +148,9 @@ public class FileResource extends Resource {
 				}
 			} catch(Exception e) {
 				// ignore retry exception and allow ZipException to be rethrown
-			} finally {
-				if (is != null)
-					try {
-						is.close();
-					} catch (IOException ioe) {
-						// ignore
-					}
 			}
 
 			throw ze; // rethrow exception if all attempts fail
-		} finally {
-			if (zf != null)
-				try {
-					zf.close();
-				} catch(IOException ioe) {
-					// ignore
-				}
 		}
 	}
 
