@@ -18,7 +18,12 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Locale;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;
@@ -83,7 +88,7 @@ public class FileResource extends Resource {
 				//   and whether its in the root folder or subfolder. Otherwise would need to keep track
 				//   of the first KML found but continue if first KML file is not in the root level then
 				//   backtrack in stream to first KML if no root-level KML is found.
-				if (entry.getName().toLowerCase().endsWith(".kml")) {
+				if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) {
 					isKmzFile = true;
 					return builder.build(zf.getInputStream(entry),
 							file.getAbsoluteFile().toURI().toString());
@@ -102,7 +107,7 @@ public class FileResource extends Resource {
 				zis = new ZipInputStream(new FileInputStream(file));
 				ZipEntry entry;
 				while ((entry = zis.getNextEntry()) != null) {
-					if (entry.getName().toLowerCase().endsWith(".kml")) {
+					if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) {
 						printFile();
 						String msg = ze.toString();// e.g. java.util.zip.ZipException: error in opening zip file
 						out.println("WARN: ZipFile failed [retry using ZipInputStream]: " + msg);
