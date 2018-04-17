@@ -20,6 +20,7 @@ import org.jdom2.input.SAXBuilder;
 
 import java.io.*;
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -44,14 +45,14 @@ public class KmzExplorer implements Closeable {
 		while (e.hasMoreElements()) {
 			ZipEntry entry = e.nextElement();
 			// skip first/root kml file
-			if (entry.getName().toLowerCase().endsWith(".kml")) break;
+			if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) break;
 		}
 	}
 
-	public Resource next() throws IOException {
+	public Resource next() {
 		while (e.hasMoreElements()) {
 			ZipEntry entry = e.nextElement();
-			if (entry.getName().toLowerCase().endsWith(".kml")) {
+			if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) {
 				return new KmzResource(entry);
 			}
 		}

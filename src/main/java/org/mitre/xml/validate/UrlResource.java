@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.BufferedInputStream;
 import java.io.PrintStream;
+import java.util.Locale;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 
@@ -69,7 +70,8 @@ public class UrlResource extends Resource {
         // Connect to get the response headers
         conn.connect();
 
-        if ("application/vnd.google-earth.kmz".equals(conn.getContentType()) || url.getFile().toLowerCase().endsWith(".kmz")) {
+        if ("application/vnd.google-earth.kmz".equals(conn.getContentType()) ||
+                url.getFile().toLowerCase(Locale.ROOT).endsWith(".kmz")) {
             // kmz file requires special handling
 			// NOTE: some files ending with .kmz are actually KML (XML) files
 			// examples:
@@ -87,7 +89,7 @@ public class UrlResource extends Resource {
             //   backtrack in stream to first KML if no root-level KML is found.
             while ((entry = zis.getNextEntry()) != null) {
                 // find first KML file in archive
-                if (entry.getName().toLowerCase().endsWith(".kml")) {
+                if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) {
                     return zis; // start reading from stream
                 }
             }
