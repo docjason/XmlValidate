@@ -18,7 +18,9 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.input.SAXBuilder;
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
@@ -63,7 +65,7 @@ public abstract class Resource implements ErrorHandler {
 
     int errors;
 
-	protected final Set<String> stats = new HashSet<String>();
+	protected final Set<String> stats = new HashSet<>();
 
     private int dumpLevel;
     private int dumpLimit;
