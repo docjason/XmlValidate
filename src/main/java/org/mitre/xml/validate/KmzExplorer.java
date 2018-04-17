@@ -18,7 +18,11 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-import java.io.*;
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
@@ -63,7 +67,7 @@ public class KmzExplorer implements Closeable {
 		if (zf != null) {
 			try {
 				zf.close();
-			} catch (IOException e) {
+			} catch (IOException ex) {
 				// ignore
 			}
 			zf = null;

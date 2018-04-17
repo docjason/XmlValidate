@@ -14,10 +14,25 @@
  */
 package org.mitre.xml.validate;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import org.jdom2.*;
 import org.jdom2.input.JDOMParseException;
@@ -161,10 +176,10 @@ public class XmlValidate {
     private PrintStream out = System.out;
     private int validFiles;
 
-    private final Map<String, Integer> stats = new TreeMap<String,Integer>();
+    private final Map<String, Integer> stats = new TreeMap<>();
 	private boolean kmlMode, kmzMode;
 
-	private static final Set<String> KML_ELEMENTS = new HashSet<String>(5);
+	private static final Set<String> KML_ELEMENTS = new HashSet<>(5);
 
 	static {
 		// possible non-kml root elements in KML document with no namespace
@@ -552,7 +567,7 @@ public class XmlValidate {
             res.setSchemaNamespace(schemaNamespace);
             StringBuilder schemaLocBuf = new StringBuilder();
             schemaLocBuf.append(schemaNamespace).append(' ').append(schemaLoc);
-            List<String> namespaces = new LinkedList<String>();
+            List<String> namespaces = new LinkedList<>();
             namespaces.add(schemaNamespace);
             // for each namespace check if defined in map
             // boolean hasGx = false;
@@ -709,7 +724,7 @@ public class XmlValidate {
     }
 
 	public void addSchemaLocation(String ns, String schemaLocation) {
-		if (schemaMap == null) schemaMap = new HashMap<String, String>();
+		if (schemaMap == null) schemaMap = new HashMap<>();
 		schemaMap.put(ns, schemaLocation);
 	}
 
@@ -721,7 +736,7 @@ public class XmlValidate {
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(file));
-            schemaMap = new HashMap<String, String>();
+            schemaMap = new HashMap<>();
             String s;
             while ((s = in.readLine()) != null) {
                 if (s.length() == 0 || s.startsWith("#"))
@@ -909,7 +924,7 @@ public class XmlValidate {
         }
 
         XmlValidate validator = new XmlValidate();
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
 		// -home argument must be called before -map is processed
 		for (String arg : args) {
