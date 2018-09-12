@@ -86,7 +86,7 @@ See xv.bat, kml21.bat, and kml22.bat for example usage.
 License
 -------
 
-Copyright 2009-2017 The MITRE Corporation
+Copyright 2009-2018 The MITRE Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
