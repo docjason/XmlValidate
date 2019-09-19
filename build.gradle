@@ -11,7 +11,7 @@ jar {
         attributes("Implementation-Title": "XmlValidate",
 				"Implementation-Version": version,
 				"Main-Class": "org.mitre.xml.validate.XmlValidate",
-				"Class-Path": "jdom2-2.0.6.jar xercesImpl-2.11.0.jar xml-apis-1.4.01.jar")
+				"Class-Path": "jdom2-2.0.6.jar xercesImpl-2.12.0.jar xml-apis-1.4.01.jar")
     }	
 }
 
@@ -27,7 +27,7 @@ task wrapper(type: Wrapper) { gradleVersion = "2.0" }
 dependencies {	
 
  compile 'org.jdom:jdom2:2.0.6'
- compile 'xerces:xercesImpl:2.11.0'
+ compile 'xerces:xercesImpl:2.12.0'
  
  testCompile 'junit:junit:4.12'
 }
