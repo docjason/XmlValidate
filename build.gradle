@@ -22,8 +22,6 @@ task install(dependsOn: jar, type: Copy) {
     from configurations.runtime
 }
 
-task wrapper(type: Wrapper) { gradleVersion = "2.0" }
-
 dependencies {	
 
  compile 'org.jdom:jdom2:2.0.6'
