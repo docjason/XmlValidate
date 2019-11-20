@@ -151,9 +151,9 @@ public class XmlValidate {
 
 	private java.util.Map<String, String> schemaMap;
 
-    private final Set<String> extensionSet = new HashSet<String>();
+    private final Set<String> extensionSet = new HashSet<>();
 
-	private final java.util.Map<String, Set<String>> errorMap = new HashMap<String, Set<String>>();
+	private final java.util.Map<String, Set<String>> errorMap = new HashMap<>();
 
     private final SAXBuilder builder;
     private final SAXBuilder validatingBuilder;
@@ -445,7 +445,7 @@ public class XmlValidate {
 		//String source = res.getSource();
 		Set<String> sources = errorMap.get(err);
 		if (sources == null) {
-			sources = new HashSet<String>();
+			sources = new HashSet<>();
 			errorMap.put(err, sources);
 		}
 		sources.add(source);
@@ -571,8 +571,7 @@ public class XmlValidate {
             namespaces.add(schemaNamespace);
             // for each namespace check if defined in map
             // boolean hasGx = false;
-            for (Object item : root.getAdditionalNamespaces()) {
-                Namespace ns = (Namespace)item;
+            for (Namespace ns : root.getAdditionalNamespaces()) {
                 String nsURI = ns.getURI();
                 schemaLoc = schemaMap.get(nsURI);
                 // if ("gx".equals(ns.getPrefix()) || NS_GOOGLE_KML_EXT.equals(nsURI)) hasGx = true;
@@ -585,8 +584,8 @@ public class XmlValidate {
                     schemaLocBuf.append(' ').append(nsURI).append(' ').append(schemaLoc);
                     namespaces.add(nsURI);
                 } else if (verbose && !"http://www.w3.org/2001/XMLSchema-instance".equals(nsURI)) {
-			out.println("WARN: Cannot find location of schema: " + nsURI);
-		}
+					out.println("WARN: Cannot find location of schema: " + nsURI);
+				}
                 // root.setAttribute(ns.getPrefix(), ns.getURI() + " " + schemaLoc, xmlns);
                 // root.setNamespace(Namespace.getNamespace(ns.getPrefix(), ns.getURI() + " " + schemaLoc));
             }
@@ -604,9 +603,8 @@ public class XmlValidate {
 		*/
             root.setAttribute("schemaLocation", schemaLocBuf.toString(), xsiNamespace);
             // if namespace declared on non-root elements then lookup schemaLocation locations
-            for (Object child : root.getChildren()) {
-                if (child instanceof Element)
-                	checkNamespace((Element)child, namespaces);
+            for (Element child : root.getChildren()) {
+				checkNamespace(child, namespaces);
             }
         } else if (schemaNamespace != null) {
             // next check if XML document needs to change to user-defined target namespace
@@ -681,14 +679,14 @@ public class XmlValidate {
     // TODO: this should only change the default/root element namespace not
     // blindly changing all namespaces in all elements
     private static void changeNamespace(Element parent, Namespace ns) {
-        for (Object child : parent.getChildren()) {
-			changeNamespace((Element)child, ns);
+        for (Element child : parent.getChildren()) {
+			changeNamespace(child, ns);
         }
         parent.setNamespace(ns);
     }
 
     private void checkNamespace(Element parent, List<String> namespaces) {
-        List<String> localNamespaces = new LinkedList<String>(namespaces);
+        List<String> localNamespaces = new LinkedList<>(namespaces);
         StringBuilder schemaLocBuf = new StringBuilder();
         Namespace ns = parent.getNamespace();
         if (ns != null) {
@@ -703,8 +701,8 @@ public class XmlValidate {
             }
         }
         // for each namespace check if defined in map
-        for (Object item : parent.getAdditionalNamespaces()) {
-            String nsURI = ((Namespace) item).getURI();
+        for (Namespace item : parent.getAdditionalNamespaces()) {
+            String nsURI = item.getURI();
             if (namespaces.contains(nsURI)) continue;
             String schemaLoc = schemaMap.get(nsURI);
             if (schemaLoc != null) {
@@ -717,9 +715,8 @@ public class XmlValidate {
         if (schemaLocBuf.length() != 0) {
             parent.setAttribute("schemaLocation", schemaLocBuf.toString(), xsiNamespace);
         }
-        for (Object child : parent.getChildren()) {
-            if (child instanceof Element)
-                checkNamespace((Element)child, localNamespaces);
+        for (Element child : parent.getChildren()) {
+			checkNamespace(child, localNamespaces);
         }
     }
 
