@@ -119,7 +119,7 @@ import org.jdom2.input.sax.XMLReaders;
  *
  * TODO: keep track of normalized error messages for summary
  */
-public class XmlValidate {
+public class XmlValidate implements ErrorStatus {
 
     /** Validation feature id */
     protected static final String VALIDATION_FEATURE =
@@ -262,6 +262,18 @@ public class XmlValidate {
 		this.dumpLevel = dumpLevel;
 	}
 
+	@Override
+	public void addWarning(String s) {
+		if(s != null) out.println(s);
+		warnings++;
+	}
+
+	@Override
+	public void addError(String s) {
+		if(s != null) out.println(s);
+		errors++;
+	}
+
 	public int getWarnings() {
 		return warnings;
 	}
@@ -355,7 +367,7 @@ public class XmlValidate {
 
 	private void checkKmzResource(File file) {
 		try(
-			KmzExplorer visitor = new KmzExplorer(out, file, schemaNamespace);
+			KmzExplorer visitor = new KmzExplorer(out, file, schemaNamespace, this);
 		) {
 			Resource res;
 			while ((res = visitor.next()) != null) {
@@ -584,7 +596,7 @@ public class XmlValidate {
                     schemaLocBuf.append(' ').append(nsURI).append(' ').append(schemaLoc);
                     namespaces.add(nsURI);
                 } else if (verbose && !"http://www.w3.org/2001/XMLSchema-instance".equals(nsURI)) {
-					out.println("WARN: Cannot find location of schema: " + nsURI);
+					addWarning("WARN: Cannot find location of schema: " + nsURI);
 				}
                 // root.setAttribute(ns.getPrefix(), ns.getURI() + " " + schemaLoc, xmlns);
                 // root.setNamespace(Namespace.getNamespace(ns.getPrefix(), ns.getURI() + " " + schemaLoc));

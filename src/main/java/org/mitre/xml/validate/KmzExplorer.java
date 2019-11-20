@@ -37,13 +37,15 @@ public class KmzExplorer implements Closeable {
 	private final File file;
 	private final PrintStream out;
 	private final String schemaNamespace;
+	private final ErrorStatus status;
 	private ZipFile zf;
 	private final Enumeration<? extends ZipEntry> e;
 
-	public KmzExplorer(PrintStream out, File file, String schemaNamespace) throws IOException {
+	public KmzExplorer(PrintStream out, File file, String schemaNamespace, ErrorStatus status) throws IOException {
 		this.out = out;
 		this.file = file;
 		this.schemaNamespace = schemaNamespace;
+		this.status = status;
 		zf = new ZipFile(file);
 		e = zf.entries();
 		while (e.hasMoreElements()) {
@@ -62,7 +64,7 @@ public class KmzExplorer implements Closeable {
 				return new KmzResource(entry);
 			} else if (nameLower.endsWith(".kmz") || nameLower.endsWith(".zip")) {
 				// KMZ file cannot reference another KMZ inside itself
-				System.out.println("WARN: KMZ file has non-compliant compressed entry: " + name);
+				status.addWarning("WARN: KMZ file has non-compliant compressed entry: " + name);
 			}
 		}
 		return null;
