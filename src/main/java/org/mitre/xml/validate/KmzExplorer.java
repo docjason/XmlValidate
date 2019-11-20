@@ -56,8 +56,13 @@ public class KmzExplorer implements Closeable {
 	public Resource next() {
 		while (e.hasMoreElements()) {
 			ZipEntry entry = e.nextElement();
-			if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) {
+			final String name = entry.getName();
+			final String nameLower = name.toLowerCase(Locale.ROOT);
+			if (nameLower.endsWith(".kml")) {
 				return new KmzResource(entry);
+			} else if (nameLower.endsWith(".kmz") || nameLower.endsWith(".zip")) {
+				// KMZ file cannot reference another KMZ inside itself
+				System.out.println("WARN: KMZ file has non-compliant compressed entry: " + name);
 			}
 		}
 		return null;
