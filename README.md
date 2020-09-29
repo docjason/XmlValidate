@@ -55,7 +55,7 @@ The first time you run this it will download and install gradle. Downloaded file
 distribution itself) will be stored in the Gradle user home directory (typically "<user_home>/.gradle").
 Subsequent runs will be much faster.
 
-If [Gradle](http://www.gradle.org) is already installed then just run:
+If [Gradle](http://www.gradle.org) is already installed locally then just run:
 
 ./gradle test install
 
@@ -86,7 +86,7 @@ See xv.bat, kml21.bat, and kml22.bat for example usage.
 License
 -------
 
-Copyright 2009-2018 The MITRE Corporation
+Copyright 2009-2020 The MITRE Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
