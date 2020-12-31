@@ -31,7 +31,7 @@ import java.util.Enumeration;
 import java.util.zip.ZipInputStream;
 
 /**
- * File resource that implements building a JDOM Document
+ * File resource that implements building a JDOM Document instance
  * from a file reference.
  * 
  * @author Jason Mathews, MITRE Corp.
