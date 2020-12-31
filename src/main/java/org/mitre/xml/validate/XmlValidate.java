@@ -585,6 +585,10 @@ public class XmlValidate implements ErrorStatus {
             // boolean hasGx = false;
             for (Namespace ns : root.getAdditionalNamespaces()) {
                 String nsURI = ns.getURI();
+				if (nsURI.isEmpty()) {
+					// The empty string, though it is a legal URI reference, cannot be used as a namespace name.
+					continue;
+				}
                 schemaLoc = schemaMap.get(nsURI);
                 // if ("gx".equals(ns.getPrefix()) || NS_GOOGLE_KML_EXT.equals(nsURI)) hasGx = true;
                 if (schemaLoc != null) {
