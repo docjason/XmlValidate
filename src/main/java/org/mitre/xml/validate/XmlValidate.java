@@ -592,8 +592,13 @@ public class XmlValidate implements ErrorStatus {
                 schemaLoc = schemaMap.get(nsURI);
                 // if ("gx".equals(ns.getPrefix()) || NS_GOOGLE_KML_EXT.equals(nsURI)) hasGx = true;
                 if (schemaLoc != null) {
-                    if (verbose)
-                        out.format("getAdditionalNamespace %s -> %s%n", nsURI, schemaLoc);
+					if (namespaces.contains(nsURI)) {
+						// skip dup namespace defs
+						continue;
+					}
+                    if (verbose) {
+						out.format("getAdditionalNamespace %s -> %s%n", nsURI, schemaLoc);
+					}
                     //root.removeNamespaceDeclaration(ns);
                     //root.addNamespaceDeclaration(Namespace.getNamespace(ns.getPrefix(), ns.getURI() + " " + schemaLoc));
                     // e.g.  xmlns:gx="http://www.google.com/kml/ext/2.2">
