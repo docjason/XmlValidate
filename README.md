@@ -69,9 +69,9 @@ Examples
 
 1. To check all .kml files against target KML 2.2 schema regardless of default schema used:
 
-     `xv -kml -schema C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2  C:/pathToMyKmlFiles`
+     `xv -kml -schema=C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2  C:/pathToMyKmlFiles`
  
-2. To check kml and kmz files against local schemas as defined in KML files: 
+2. To check kml and kmz files against local schemas as defined in KML files:
 
      `xv -kmz -map=ns.map C:/pathToMyKmlFiles`
 

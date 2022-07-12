@@ -912,7 +912,7 @@ public class XmlValidate implements ErrorStatus {
         System.err.println("\t1) To check all .kml files against target KML 2.2 schema regardless of default schema used:");
         System.err.println("\t    XmlValidate -kml -schema=C:/pathToXsd/kml22.xsd -ns=http://www.opengis.net/kml/2.2 C:/pathToMyKmlFiles\n");
         System.err.println("\t2) To check all CoT .xml files against CoT Schema:");
-        System.err.println("\t    XmlValidate -schema C:/pathToXsd/event.xsd C:/pathToMyCoTFiles\n");
+        System.err.println("\t    XmlValidate -schema=C:/pathToXsd/event.xsd C:/pathToData/cot.xml\n");
         System.err.println("\t3) Validate kml and kmz files against local schemas as defined in KML files:");
         System.err.println("\t    XmlValidate -kmz -map=ns.map C:/pathToMyKmlFiles\n");
         System.err.println("\t4) Validate by URL for KML and target schema and print KML content");
