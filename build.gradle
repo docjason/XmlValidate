@@ -24,8 +24,8 @@ task install(dependsOn: jar, type: Copy) {
 
 dependencies {	
 
- implementation 'org.jdom:jdom2:2.0.6'
- implementation 'xerces:xercesImpl:2.12.0'
+ implementation 'org.jdom:jdom2:2.0.6.1'
+ implementation 'xerces:xercesImpl:2.12.2'
  
- testImplementation 'junit:junit:4.12'
+ testImplementation 'junit:junit:4.13.1'
 }
