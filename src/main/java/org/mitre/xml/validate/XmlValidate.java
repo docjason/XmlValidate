@@ -566,6 +566,8 @@ public class XmlValidate implements ErrorStatus {
             }
             String schemaLoc = schemaMap.get(schemaNamespace);
             if (schemaLoc == null) {
+				// note: if xmlns="http://www.w3.org/2001/XMLSchema" 
+				// then there isn't a XSD that defines what a XSD is
                 res.printFile();
                 out.println("INFO: namespace not registered: " + schemaNamespace);
 				if (summary) addStatus("INFO: namespace not registered");
