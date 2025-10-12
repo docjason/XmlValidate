@@ -1,6 +1,6 @@
+package org.mitre.xml.validate;
+
 import junit.framework.TestCase;
-import org.mitre.xml.validate.UrlResource;
-import org.mitre.xml.validate.XmlValidate;
 
 import java.io.File;
 import java.net.MalformedURLException;

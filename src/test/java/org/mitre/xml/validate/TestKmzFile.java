@@ -1,9 +1,9 @@
+package org.mitre.xml.validate;
+
 import junit.framework.TestCase;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.mitre.xml.validate.FileResource;
-import org.mitre.xml.validate.XmlValidate;
 
 import java.io.File;
 import java.io.IOException;
