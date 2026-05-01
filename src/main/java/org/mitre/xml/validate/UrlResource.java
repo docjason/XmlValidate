@@ -78,22 +78,30 @@ public class UrlResource extends Resource {
 			//  http://www.strandbewertung.de/strandbewertung.kmz => Content-Type: application/vnd.google-earth.kmz
 			//  http://hemendikhortik.zxq.net/Eslovenia_en.kmz => Content-Type: text/plain
             ZipInputStream zis = new ZipInputStream(conn.getInputStream());
-            ZipEntry entry;
-            //   Simply find first kml file in the archive
-            //
-            //   Note that KML documentation loosely defines that it takes first root-level KML file
-            //   in KMZ archive as the main KML document but Google Earth (version 4.3 as of Dec-2008)
-            //   actually takes the first kml file regardless of name (e.g. doc.kml which is convention only)
-            //   and whether its in the root folder or subfolder. Otherwise would need to keep track
-            //   of the first KML found but continue if first KML file is not in the root level then
-            //   backtrack in stream to first KML if no root-level KML is found.
-            while ((entry = zis.getNextEntry()) != null) {
-                // find first KML file in archive
-                if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) {
-                    return zis; // start reading from stream
+            boolean returned = false;
+            try{
+                ZipEntry entry;
+                //   Simply find first kml file in the archive
+                //
+                //   Note that KML documentation loosely defines that it takes first root-level KML file
+                //   in KMZ archive as the main KML document but Google Earth (version 4.3 as of Dec-2008)
+                //   actually takes the first kml file regardless of name (e.g. doc.kml which is convention only)
+                //   and whether its in the root folder or subfolder. Otherwise would need to keep track
+                //   of the first KML found but continue if first KML file is not in the root level then
+                //   backtrack in stream to first KML if no root-level KML is found.
+                while ((entry = zis.getNextEntry()) != null) {
+                    // find first KML file in archive
+                    if (entry.getName().toLowerCase(Locale.ROOT).endsWith(".kml")) {
+                        returned = true;
+                        return zis; // start reading from stream
+                    }
+                }
+                throw new IOException("Failed to find KML content in KMZ file");
+            } finally {
+                if (!returned) {
+                    zis.close();
                 }
             }
-            throw new IOException("Failed to find KML content in KMZ file");
         }
 
         // Else read the raw bytes.
