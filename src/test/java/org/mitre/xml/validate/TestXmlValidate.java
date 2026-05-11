@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.Set;
 
 /**
- * @author Jason Mathews, MITRE Corp.
+ * @author Jason Mathews
  *
  * Date: 4/27/12 11:10 AM
  */

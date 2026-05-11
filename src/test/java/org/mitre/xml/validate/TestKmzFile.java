@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author Jason Mathews, MITRE Corp.
+ * @author Jason Mathews
  * Date: 9/29/13 9:11 PM
  */
 public class TestKmzFile extends TestCase {

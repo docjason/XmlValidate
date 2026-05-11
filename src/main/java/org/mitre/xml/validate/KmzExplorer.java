@@ -1,15 +1,8 @@
 /*
  *  KmzExplorer.java
  *
- *  (C) Copyright MITRE Corporation 2014
- *
- *  The program is provided "as is" without any warranty express or implied, including
- *  the warranty of non-infringement and the implied warranties of merchantability and
- *  fitness for a particular purpose.  The Copyright owner will not be liable for any
- *  damages suffered by you as a result of using the Program.  In no event will the
- *  Copyright owner be liable for any special, indirect or consequential damages or
- *  lost profits even if the Copyright owner has been advised of the possibility of
- *  their occurrence.
+ *  (C) Copyright 2009-2026 Jason Mathews
+ *  Licensed under the Apache-2.0 License
  *
  */
 package org.mitre.xml.validate;
@@ -29,7 +22,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
- * @author Jason Mathews, MITRE Corp.
+ * @author Jason Mathews
  * Created on 6/30/2014.
  */
 public class KmzExplorer implements Closeable {
