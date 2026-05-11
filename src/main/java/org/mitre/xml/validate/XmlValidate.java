@@ -1,15 +1,8 @@
 /*
  *  XmlValidate.java
  *
- *  (C) Copyright MITRE Corporation 2009
- *
- *  The program is provided "as is" without any warranty express or implied, including
- *  the warranty of non-infringement and the implied warranties of merchantability and
- *  fitness for a particular purpose.  The Copyright owner will not be liable for any
- *  damages suffered by you as a result of using the Program.  In no event will the
- *  Copyright owner be liable for any special, indirect or consequential damages or
- *  lost profits even if the Copyright owner has been advised of the possibility of
- *  their occurrence.
+ *  (C) Copyright 2009-2026 Jason Mathews
+ *  Licensed under the Apache-2.0 License
  *
  */
 package org.mitre.xml.validate;
@@ -41,8 +34,8 @@ import org.jdom2.input.sax.XMLReaders;
 
 /**
  * XmlValidate validates XML documents in several methods depending on the task
- * in hand.  XML documents are validated against provided XML schema instance documents in
- * three different approaches.
+ * in hand.  XML documents are validated against provided XML schema instance
+ * documents in three different approaches.
  *
  * First documents are checked as being well-formed XML.  If parsing
  * with non-validating parser fails then validation stops there.
@@ -91,7 +84,7 @@ import org.jdom2.input.sax.XMLReaders;
  * If the error is in the XML Schema not the instance document then the context will not
  * be printed. 
  *
- * @author Jason Mathews, MITRE Corp.
+ * @author Jason Mathews
  * Date: Apr 17, 2008 2:33:56 PM
  *
  * History:
@@ -753,9 +746,7 @@ public class XmlValidate implements ErrorStatus {
      * @param file
      */
     public void setMap(File file) {
-        BufferedReader in = null;
-        try {
-            in = new BufferedReader(new FileReader(file));
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             schemaMap = new HashMap<>();
             String s;
             while ((s = in.readLine()) != null) {
@@ -784,13 +775,6 @@ public class XmlValidate implements ErrorStatus {
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        } finally {
-            if (in != null)
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    // ignore
-                }
         }
         if (verbose)
             System.err.println(schemaMap);
@@ -809,7 +793,7 @@ public class XmlValidate implements ErrorStatus {
     }
 
     public void setVerbose(boolean verbose) {
-        this.verbose = true;
+        this.verbose = verbose;
     }
 
     public void setHomeDir(String homeDir) {
